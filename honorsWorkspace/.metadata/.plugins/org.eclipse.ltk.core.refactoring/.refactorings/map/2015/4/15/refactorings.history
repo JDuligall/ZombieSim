@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;main.java.org.mapsforge.map.swing&apos; to &apos;org.mapsforge.map.swing&apos;&#x0D;&#x0A;- Original project: &apos;map&apos;&#x0D;&#x0A;- Original element: &apos;map/src/main.java.org.mapsforge.map.swing&apos;&#x0D;&#x0A;- Renamed element: &apos;map/src/org.mapsforge.map.swing&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;main.java.org.mapsforge.map.swing&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;main.java.org.mapsforge.map.swing" name="org.mapsforge.map.swing" qualified="false" references="true" stamp="1428830836268" textual="false" version="1.0"/>
+</session>

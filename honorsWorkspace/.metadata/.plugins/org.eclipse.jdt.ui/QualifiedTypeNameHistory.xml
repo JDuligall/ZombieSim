@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.JMapViewer"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.tilesources.OfflineOsmTileSource"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.interfaces.TileSource"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
+<fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
+</qualifiedTypeNameHistroy>
