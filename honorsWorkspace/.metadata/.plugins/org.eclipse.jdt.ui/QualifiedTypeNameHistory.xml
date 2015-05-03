@@ -6,4 +6,23 @@
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="java.awt.event.WindowEvent"/>
 <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapMarkerDot"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.Coordinate"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapPolygonImpl"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="javax.xml.bind.JAXBContext"/>
+<fullyQualifiedTypeName name="javax.xml.bind.Unmarshaller"/>
+<fullyQualifiedTypeName name="mapContents.Osm"/>
+<fullyQualifiedTypeName name="java.io.FileInputStream"/>
+<fullyQualifiedTypeName name="javax.swing.text.html.HTML.Tag"/>
+<fullyQualifiedTypeName name="mapContents.Tag"/>
+<fullyQualifiedTypeName name="mapContents.Way"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.math.BigInteger"/>
+<fullyQualifiedTypeName name="mapContents.Node"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="mapContents.Nd"/>
+<fullyQualifiedTypeName name="main.MapPolyLine"/>
+<fullyQualifiedTypeName name="java.awt.Stroke"/>
+<fullyQualifiedTypeName name="java.awt.BasicStroke"/>
 </qualifiedTypeNameHistroy>

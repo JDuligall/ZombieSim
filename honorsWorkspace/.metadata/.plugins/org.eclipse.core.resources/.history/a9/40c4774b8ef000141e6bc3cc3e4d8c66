@@ -1,0 +1,36 @@
+package main;
+
+import javax.swing.JFrame;
+
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+public class MapViewer {
+	
+public static void main(String[] args) {
+        
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800,800);
+        JMapViewer map = new JMapViewer();
+        //OfflineOsmTileSource src = new OfflineOsmTileSource("file:///C:/Users/Jacob/Documents/Victoria%20Fourth%20Year/jmapviewer/assets/Tiles", 16, 19);
+        //map.setTileSource(src);
+        
+    	//<node id="2338412630" visible="true" version="2" changeset="20096780" timestamp="2014-01-20T02:52:07Z" user="howdystranger" uid="1839337" lat="-41.2995998" lon="174.7791143"/>
+        
+        Coordinate coord = new Coordinate(-41.2995998, 174.7791143);
+        
+        MapMarkerDot marker = new MapMarkerDot(coord);
+
+        map.addMapMarker(marker);
+        
+        map.setDisplayPosition(coord, 19);
+        
+        System.out.println(map.getMapPosition(coord).x+"  "+map.getMapPosition(coord).y);
+        
+        frame.add(map);
+        frame.setVisible(true);
+
+    }
+
+}

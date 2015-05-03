@@ -1,0 +1,45 @@
+package main;
+
+import javax.swing.JFrame;
+
+import org.openstreetmap.gui.jmapviewer.Coordinate;
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
+public class MapViewer {
+	
+public static void main(String[] args) {
+        
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800,800);
+        JMapViewer map = new JMapViewer();
+        //OfflineOsmTileSource src = new OfflineOsmTileSource("file:///C:/Users/Jacob/Documents/Victoria%20Fourth%20Year/jmapviewer/assets/Tiles", 16, 19);
+        //map.setTileSource(src);
+        
+    	//<node id="2338412630" visible="true" version="2" changeset="20096780" timestamp="2014-01-20T02:52:07Z" user="howdystranger" uid="1839337" lat="-41.2995998" lon="174.7791143"/>
+    	//<node id="2629352691" visible="true" version="1" changeset="20096780" timestamp="2014-01-20T02:52:05Z" user="howdystranger" uid="1839337" lat="-41.2994774" lon="174.7790564"/>
+        //<node id="2629352686" visible="true" version="1" changeset="20096780" timestamp="2014-01-20T02:52:05Z" user="howdystranger" uid="1839337" lat="-41.2994808" lon="174.7789696"/>
+
+        Coordinate coord = new Coordinate(-41.2995998, 174.7791143);
+        Coordinate coord1 = new Coordinate(-41.2994774, 174.7790564);
+        Coordinate coord2 = new Coordinate(-41.2994808, 174.7789696);
+        Coordinate coord3 = new Coordinate(-41.2995998, 174.7791143);
+        
+        MapMarkerDot marker = new MapMarkerDot(coord);
+
+        map.addMapMarker(marker);
+        
+        map.setDisplayPosition(coord, 19);
+        
+        
+        MapPolygonImpl polygon = new MapPolygonImpl(coord,coord1,coord2,coord3);
+        map.addMapPolygon(polygon);
+        
+        frame.add(map);
+        frame.setVisible(true);
+        System.out.println(map.getPosition());
+        
+    }
+
+}

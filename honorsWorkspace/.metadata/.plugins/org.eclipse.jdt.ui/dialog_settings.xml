@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Users\Jacob\Documents\VictoriaFourthYear\batik-bin-1.8\batik-1.8" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="C:\Users\Jacob\Documents\Honors\Git\ZombieSim\honorsWorkspace\LIBS" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="C:\Users\Jacob\Documents\VictoriaFourthYear\batik-src-1.8\batik-1.8\sources" key="org.eclipse.jdt.ui.last.external.project"/>
 	<section name="RefactoringWizard.preview">
 		<item value="600" key="width"/>
@@ -40,6 +40,8 @@
 		<item value="0" key="pageIndex"/>
 	</section>
 	<section name="completion_proposal_size">
+		<item value="437" key="size.y"/>
+		<item value="670" key="size.x"/>
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
