@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Color;
 import java.awt.Stroke;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.math.BigInteger;
@@ -19,20 +21,30 @@ import mapContents.Node;
 import mapContents.Osm;
 import mapContents.Way;
 import mapContents.Tag;
+import mapDrawable.MapPolyLine;
+import mapDrawable.Zombie;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
+import org.openstreetmap.gui.jmapviewer.MapRectangleImpl;
+import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
 
 public class MapViewer {
-
-	public static void main(String[] args) {
-
-		JFrame frame = new JFrame();
+	
+	private List<Thread> threads = new ArrayList<Thread>();
+	private JMapViewer map;
+	private JFrame frame;
+	private Osm param;
+	private Way myStreet;
+	private HashMap<BigInteger, Coordinate> locations;
+	
+	public MapViewer(){
+		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 800);
-		JMapViewer map = new JMapViewer();
+		map = new JMapViewer();
 		// OfflineOsmTileSource src = new
 		// OfflineOsmTileSource("file:///C:/Users/Jacob/Documents/Victoria%20Fourth%20Year/jmapviewer/assets/Tiles",
 		// 16, 19);
@@ -70,22 +82,11 @@ public class MapViewer {
 		//
 		//
 		// map.addMapPolygon(polygon);
-		Osm param = null;
-		Way myStreet = null;
-		HashMap<BigInteger, Coordinate> locations = new HashMap<BigInteger, Coordinate>();
+		param = null;
+		myStreet = null;
+		locations = new HashMap<BigInteger, Coordinate>();
 
-		try {
-			JAXBContext context = JAXBContext.newInstance(Osm.class);
-			Unmarshaller unMarshaller = context.createUnmarshaller();
-			param = (Osm) unMarshaller.unmarshal(new FileInputStream(
-					"../../mapFiles/myHouse.osm"));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		readXML();
 
 		List<Object> contents = param.getBoundOrUserOrPreferences();
 		// read through the OSM file to get the contents
@@ -130,13 +131,38 @@ public class MapViewer {
 		}
 		
 		 //MapPolygonImpl polygon = new MapPolygonImpl(coords);
-		 MapPolyLine polygon = new MapPolyLine(coords);
-		 polygon.setColor(Color.red);
-		 polygon.setBackColor(Color.red);
-		 map.addMapPolygon(polygon);
+		 MapPolyLine polygon1 = new MapPolyLine(coords);
+		 //<bounds minlat="-41.2994300" minlon="174.7788100" maxlat="-41.2989000" maxlon="174.7796000"/>
+		 MapRectangleImpl rect = new MapRectangleImpl(new Coordinate(-41.2984300,174.7768100), new Coordinate(-41.2999000,174.7806000));
+		 map.addMapRectangle(rect);
+		 //ArrayList<Coordinate> lol = new ArrayList<Coordinate>();
+		 //Coordinate coord3 = new Coordinate(-41.2992232, 174.7792977);
+		 //lol.add(coord3);
 		 
+		 
+		 //Makes the zombie and thread for zombie
+		 Zombie polygon = new Zombie(coords);
+		 Thread thread = new Thread(polygon);
+		 this.threads.add(thread);//Adds thread to loop set
+		 
+		 
+		 polygon1.setColor(Color.red);
+		 polygon1.setBackColor(Color.red);
 		 //map.add
-		
+		 map.addMouseWheelListener(new MouseWheelListener() {
+			
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				if(map.getZoom() > 15){
+					map.addMapPolygon(polygon);
+				 	map.addMapPolygon(polygon1);
+				 }else{
+					 map.removeMapPolygon(polygon);
+					 map.removeMapPolygon(polygon1);
+				 }
+				
+			}
+		});
 
 		// store all the nodes in a list so i can get the coordinates using the
 		// reference. ------------DONE its called locations
@@ -149,11 +175,46 @@ public class MapViewer {
 		frame.setVisible(true);
 		if(myStreet!=null)System.out.println("allGood");
 		
-		// while(true){
-		// coord.setLat(coord.getLat()+0.0000001);
-		// map.repaint();
-		// }
+		while(true){
+			step();
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
 
+	private void readXML() {
+		try {
+			JAXBContext context = JAXBContext.newInstance(Osm.class);
+			Unmarshaller unMarshaller = context.createUnmarshaller();
+			param = (Osm) unMarshaller.unmarshal(new FileInputStream(
+					"../../mapFiles/myHouse.osm"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void main(String[] args) {
+
+		new MapViewer();
+		
+
+	}
+	
+	
+	public void step(){
+		for(Thread t : threads){
+			t.run();
+			map.repaint();
+		}
 	}
 
 }

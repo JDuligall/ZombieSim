@@ -25,4 +25,9 @@
 <fullyQualifiedTypeName name="main.MapPolyLine"/>
 <fullyQualifiedTypeName name="java.awt.Stroke"/>
 <fullyQualifiedTypeName name="java.awt.BasicStroke"/>
+<fullyQualifiedTypeName name="java.awt.geom.Ellipse2D.Double"/>
+<fullyQualifiedTypeName name="java.awt.geom.Ellipse2D"/>
+<fullyQualifiedTypeName name="mapDrawable.Zombie"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseWheelListener"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapRectangleImpl"/>
 </qualifiedTypeNameHistroy>
