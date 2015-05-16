@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.JMapViewer"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.tilesources.OfflineOsmTileSource"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.interfaces.TileSource"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
@@ -25,9 +24,11 @@
 <fullyQualifiedTypeName name="main.MapPolyLine"/>
 <fullyQualifiedTypeName name="java.awt.Stroke"/>
 <fullyQualifiedTypeName name="java.awt.BasicStroke"/>
-<fullyQualifiedTypeName name="java.awt.geom.Ellipse2D.Double"/>
-<fullyQualifiedTypeName name="java.awt.geom.Ellipse2D"/>
 <fullyQualifiedTypeName name="mapDrawable.Zombie"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseWheelListener"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapRectangleImpl"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.JMapViewer"/>
+<fullyQualifiedTypeName name="java.awt.geom.Ellipse2D"/>
+<fullyQualifiedTypeName name="java.awt.geom.Ellipse2D.Double"/>
 </qualifiedTypeNameHistroy>

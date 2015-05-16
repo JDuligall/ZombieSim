@@ -34,7 +34,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
 public class MapViewer {
 	
 	private List<Thread> threads = new ArrayList<Thread>();
-	private JMapViewer map;
+	static private JMapViewer map;
 	private JFrame frame;
 	private Osm param;
 	private Way myStreet;
@@ -141,7 +141,7 @@ public class MapViewer {
 		 
 		 
 		 //Makes the zombie and thread for zombie
-		 Zombie polygon = new Zombie(coords);
+		 Zombie polygon = new Zombie(coords,map);
 		 Thread thread = new Thread(polygon);
 		 this.threads.add(thread);//Adds thread to loop set
 		 
