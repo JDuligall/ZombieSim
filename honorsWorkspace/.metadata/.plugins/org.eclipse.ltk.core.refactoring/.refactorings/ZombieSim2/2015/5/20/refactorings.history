@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;polygon&apos; in &apos;main.MapViewer.doStuffTest()&apos; to &apos;zombie&apos;&#x0D;&#x0A;- Original project: &apos;ZombieSim2&apos;&#x0D;&#x0A;- Original element: &apos;main.MapViewer.doStuffTest().polygon&apos;&#x0D;&#x0A;- Renamed element: &apos;polygon&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;polygon&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;main{MapViewer.java[MapViewer~doStuffTest@polygon!3221!3260!3228!3234!QZombie;!0!false" name="zombie" references="true" stamp="1431820656624" version="1.0"/>
+</session>

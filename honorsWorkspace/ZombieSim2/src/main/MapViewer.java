@@ -1,15 +1,16 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Stroke;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JFrame;
 import javax.xml.bind.JAXBContext;
@@ -19,161 +20,145 @@ import javax.xml.bind.Unmarshaller;
 import mapContents.Nd;
 import mapContents.Node;
 import mapContents.Osm;
-import mapContents.Way;
 import mapContents.Tag;
-import mapDrawable.MapPolyLine;
-import mapDrawable.Zombie;
+import mapContents.Way;
+import mapDrawable.ZombieDot;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
-import org.openstreetmap.gui.jmapviewer.MapRectangleImpl;
-import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 public class MapViewer {
 	
 	private List<Thread> threads = new ArrayList<Thread>();
+	private List<Runnable> runnables = new ArrayList<Runnable>();
 	static private JMapViewer map;
 	private JFrame frame;
 	private Osm param;
-	private Way myStreet;
 	private HashMap<BigInteger, Coordinate> locations;
+	private HashMap<Way,ArrayList<Nd>> ways;
+	private ArrayList<Node> nodes;
+	private ArrayList<Node> roadNodes;
+	ExecutorService executorService;
+	private HashMap<BigInteger, Node> refNodes;
 	
 	public MapViewer(){
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800, 800);
-		map = new JMapViewer();
-		// OfflineOsmTileSource src = new
-		// OfflineOsmTileSource("file:///C:/Users/Jacob/Documents/Victoria%20Fourth%20Year/jmapviewer/assets/Tiles",
-		// 16, 19);
-		// map.setTileSource(src);
-
-		// <node id="2338412630" visible="true" version="2" changeset="20096780"
-		// timestamp="2014-01-20T02:52:07Z" user="howdystranger" uid="1839337"
-		// lat="-41.2995998" lon="174.7791143"/>
-		// <node id="2629352691" visible="true" version="1" changeset="20096780"
-		// timestamp="2014-01-20T02:52:05Z" user="howdystranger" uid="1839337"
-		// lat="-41.2994774" lon="174.7790564"/>
-		// <node id="2629352686" visible="true" version="1" changeset="20096780"
-		// timestamp="2014-01-20T02:52:05Z" user="howdystranger" uid="1839337"
-		// lat="-41.2994808" lon="174.7789696"/>
-		// <node id="3301422781" visible="true" version="1" changeset="28294949"
-		// timestamp="2015-01-20T21:40:08Z" user="howdystranger" uid="1839337"
-		// lat="-41.2992232" lon="174.7792977"/>
-
-		// Coordinate coord = new Coordinate(-41.2995998, 174.7791143);
-		// Coordinate coord1 = new Coordinate(-41.2994774, 174.7790564);
-		// Coordinate coord2 = new Coordinate(-41.2994808, 174.7789696);
-		// Coordinate coord3 = new Coordinate(-41.2992232, 174.7792977);
-		//
-		// MapMarkerDot marker = new MapMarkerDot(coord);
-		//
-		// map.addMapMarker(marker);
-		//
-		// map.setDisplayPosition(coord, 19);
-		//
-		//
-		// MapPolygonImpl polygon = new
-		// MapPolygonImpl(coord,coord1,coord2,coord3);
-		// polygon.setColor(Color.red);
-		// polygon.setBackColor(Color.red);
-		//
-		//
-		// map.addMapPolygon(polygon);
+		
 		param = null;
-		myStreet = null;
+		nodes = new ArrayList<Node>();
+		roadNodes = new ArrayList<Node>();
 		locations = new HashMap<BigInteger, Coordinate>();
-
+		ways = new HashMap<Way,ArrayList<Nd>>();
+		refNodes = new HashMap<BigInteger, Node>();
+		
+		executorService = Executors.newFixedThreadPool(100);
+		
+		setUpFrame();
 		readXML();
+		doStuffTest();
+		
+	}
 
-		List<Object> contents = param.getBoundOrUserOrPreferences();
+	private void doStuffTest() {
+		
+		readOSMFile();
+
+		 
+		 for(int i = 0; i < roadNodes.size(); i++){
+			 Coordinate crd = new Coordinate(roadNodes.get(i).getLat(),roadNodes.get(i).getLon());
+			 MapMarker test = new ZombieDot(crd, roadNodes.get(i),map);
+			 Runnable run = (Runnable)test;
+			 this.runnables.add(run);
+			 Thread thread = new Thread((Runnable) test);
+			 this.threads.add(thread);
+			 //executorService.submit(run);			 
+			 map.addMapMarker(test);
+		 }
+		 
+		 //dont render stuff off screen
+		 //dont render past certain zoom level
+		 
+		 startSim();
+		
+	}
+
+	private void readOSMFile() {
 		// read through the OSM file to get the contents
+		
+		List<Object> contents = param.getBoundOrUserOrPreferences();
 		for (int i = 0; i < contents.size(); i++) {
 			Object cur = contents.get(i);
-			
+			Boolean isRoad = false;
+			//if its a node then store in the nodes list.
 			if (cur.getClass().equals((mapContents.Node.class))) {
 				Node curNode = (Node)cur;
+				refNodes.put(curNode.getId(), curNode);
 				locations.put(curNode.getId(), new Coordinate(curNode.getLat(),curNode.getLon()));
-				
+				nodes.add(curNode);
 				
 			} else if (cur.getClass().equals((mapContents.Way.class))) {
+				//If it is a way then...
 				Way way = (Way) contents.get(i);
+				
+				
 				List<Object> wayNodes = way.getRest();
+				ArrayList<Nd> nds = new ArrayList<Nd>();
+				//get the stuff in the way, will either be a nd or a tag
 				for (int j = 0; j < wayNodes.size(); j++) {
-					if (wayNodes.get(j).getClass().equals(Tag.class)) {
+					Object current = wayNodes.get(j);
+					
+					if(current.getClass().equals(mapContents.Nd.class)){   
+						
+						Nd curNd = (Nd)current;
+						nds.add(curNd);
+						
+					}else if (current.getClass().equals(Tag.class)) {
 						Tag t = (Tag) wayNodes.get(j);
-						if (t.getV().equals("Buckle Street")) {
-							myStreet = way;
-							break;
+						if (t.getK().equals("highway")) {
+							//Then these nodes can be added to the list.
+							isRoad = true;
 						}
 					}
+					
 				}
-
+				if(isRoad){
+					for(Nd nd: nds){
+						roadNodes.add(refNodes.get(nd.getRef()));
+					}
+				}
+				ways.put(way,nds);
 			}
 		}
 		
-		// myStreet.getRest()
-		
-		List<Object> myStreetTags = myStreet.getRest();
-		ArrayList<Nd> nds = new ArrayList<Nd>();
-		ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
-		
-		for(int i = 0;i<myStreetTags.size();i++){
-			Object cur = myStreetTags.get(i);
-			if(cur.getClass().equals(mapContents.Nd.class)){
-				Nd curNd = (Nd)cur;
-				nds.add(curNd);
-
-				coords.add(locations.get(curNd.getRef()));
-			}
-		}
-		
-		 //MapPolygonImpl polygon = new MapPolygonImpl(coords);
-		 MapPolyLine polygon1 = new MapPolyLine(coords);
-		 //<bounds minlat="-41.2994300" minlon="174.7788100" maxlat="-41.2989000" maxlon="174.7796000"/>
-		 MapRectangleImpl rect = new MapRectangleImpl(new Coordinate(-41.2984300,174.7768100), new Coordinate(-41.2999000,174.7806000));
-		 map.addMapRectangle(rect);
-		 //ArrayList<Coordinate> lol = new ArrayList<Coordinate>();
-		 //Coordinate coord3 = new Coordinate(-41.2992232, 174.7792977);
-		 //lol.add(coord3);
-		 
-		 
-		 //Makes the zombie and thread for zombie
-		 Zombie polygon = new Zombie(coords,map);
-		 Thread thread = new Thread(polygon);
-		 this.threads.add(thread);//Adds thread to loop set
-		 
-		 
-		 polygon1.setColor(Color.red);
-		 polygon1.setBackColor(Color.red);
-		 //map.add
-		 map.addMouseWheelListener(new MouseWheelListener() {
-			
-			@Override
-			public void mouseWheelMoved(MouseWheelEvent e) {
-				if(map.getZoom() > 15){
-					map.addMapPolygon(polygon);
-				 	map.addMapPolygon(polygon1);
-				 }else{
-					 map.removeMapPolygon(polygon);
-					 map.removeMapPolygon(polygon1);
+		//iterate through ways and set each node to have its neighbours
+		 Iterator waysIt = ways.entrySet().iterator();
+		 while(waysIt.hasNext()){
+			 Map.Entry pair = (Entry) waysIt.next();
+			 ArrayList<Nd> pairNds = (ArrayList<Nd>) pair.getValue();
+			 
+			 for(int i = 0; i < pairNds.size(); i++){
+				 BigInteger ref = pairNds.get(i).getRef();
+				 
+				 Node n = refNodes.get(ref);
+				 
+				 if(0 < i){
+					 BigInteger n1Ref = pairNds.get(i-1).getRef();
+					 n.addNeighbour(refNodes.get(n1Ref));
 				 }
-				
-			}
-		});
+				 
+				 if(i <= pairNds.size()-2){
+					 BigInteger n2Ref = pairNds.get(i+1).getRef();
+					 n.addNeighbour(refNodes.get(n2Ref));
+				 }
+				 
+			 }	 
+		 }
+	}
 
-		// store all the nodes in a list so i can get the coordinates using the
-		// reference. ------------DONE its called locations
-
-		// TODO Store all nd of my street as coordinates
-		// make a polygon from the coordinates.
-		// add the polygon.
-
+	private void startSim() {
 		frame.add(map);
 		frame.setVisible(true);
-		if(myStreet!=null)System.out.println("allGood");
+		
 		
 		while(true){
 			step();
@@ -184,6 +169,17 @@ public class MapViewer {
 				e1.printStackTrace();
 			}
 		}
+		
+	}
+
+	private void setUpFrame() {
+		frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(800, 800);
+		map = new JMapViewer();
+		
+		//TODO set position relative to what has been read in
+		map.setDisplayPosition(new Coordinate(-41.299278259277344, 174.7796173095703), 10);
 	}
 
 	private void readXML() {
@@ -191,30 +187,145 @@ public class MapViewer {
 			JAXBContext context = JAXBContext.newInstance(Osm.class);
 			Unmarshaller unMarshaller = context.createUnmarshaller();
 			param = (Osm) unMarshaller.unmarshal(new FileInputStream(
-					"../../mapFiles/myHouse.osm"));
+					"../../mapFiles/myHouse1.osm"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 
-	public static void main(String[] args) {
-
-		new MapViewer();
-		
-
-	}
-	
-	
 	public void step(){
-		for(Thread t : threads){
-			t.run();
-			map.repaint();
+//		for(Thread t : threads){
+//			t.run();
+//			map.repaint();
+//		}
+		for(Runnable r : runnables){
+			executorService.submit(r);
+			//if(((MapMarker)r).isVisible()){
+				map.repaint();
+			//}
 		}
 	}
-
+	
+	public static void main(String[] args) {
+		new MapViewer();
+	}
+	
 }
+
+
+
+
+
+
+//STUFF THAT WAS UNDER readOSMFile()=========================================================================================
+
+//Setting up the test street(outside ma house)
+//List<Object> myStreetTags = myStreet.getRest();
+//ArrayList<Nd> nds = new ArrayList<Nd>();
+//ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
+//
+//for(int i = 0;i<myStreetTags.size();i++){
+//	Object cur = myStreetTags.get(i);
+//	if(cur.getClass().equals(mapContents.Nd.class)){
+//		Nd curNd = (Nd)cur;
+//		nds.add(curNd);
+//		coords.add(locations.get(curNd.getRef()));
+//	}
+//}
+
+ //drawing a rectangle around the OSM map area.
+		 
+ //<bounds minlat="-41.2994300" minlon="174.7788100" maxlat="-41.2989000" maxlon="174.7796000"/>
+// MapRectangleImpl rect = new MapRectangleImpl(new Coordinate(-41.2984300,174.7768100), new Coordinate(-41.2999000,174.7806000));
+// map.addMapRectangle(rect);		 
+ 
+ 
+ 
+/*		 //test seeing nodes
+ for(Node n:nodes){
+	 MapMarkerDot marker = new MapMarkerDot(new Coordinate(n.getLat(),n.getLon()));
+	map.addMapMarker(marker);
+ }
+ 
+ //test joints between nodes
+ 
+ ArrayList<MapPolyLine> lines = new ArrayList<MapPolyLine>();
+ 
+ for(Node n: nodes){
+	 Coordinate nC = new Coordinate(n.getLat(),n.getLon());
+	 for(Node n1: n.getNeighbours()){
+		 Coordinate n1C = new Coordinate(n1.getLat(), n1.getLon());
+		 ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
+		 coords.add(nC);
+		 coords.add(n1C);
+		 coords.add(n1C);
+		 lines.add(new MapPolyLine(coords));
+	 }
+ }
+ 
+ for(MapPolyLine line:lines){
+	 map.addMapPolygon(line);
+ }
+ 
+ ArrayList<Coordinate> foo = new ArrayList<Coordinate>();
+ foo.add(new Coordinate(1,1));
+ foo.add(new Coordinate(2,2));
+ foo.add(new Coordinate(3,3));
+ map.addMapPolygon(new MapPolyLine(foo));
+ 
+ 
+ 
+ // rudimentary implementation of only showing map contents after a certain zoom level. 
+ map.addMouseWheelListener(new MouseWheelListener() {
+	
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		if(map.getZoom() > 15){
+			map.addMapPolygon(zombie);
+		 	//map.addMapPolygon(polygon1);
+		 }else{
+			 map.removeMapPolygon(zombie);
+			 //map.removeMapPolygon(polygon1);
+		 }
+		
+	}
+});
+
+// store all the nodes in a list so i can get the coordinates using the
+// reference. ------------DONE its called locations
+
+ //Makes the zombie and thread for zombie
+ ArrayList<Coordinate> crds = new ArrayList<Coordinate>();
+
+ 
+ Zombie zombie = new Zombie(map,nodes.get(1));
+ 
+ Thread thread = new Thread(zombie);
+ this.threads.add(thread);//Adds thread to loop set
+ 
+ MapMarker marker =  new MapMarkerDot(crd);
+ //map.addMapMarker(marker);
+ 
+ MapPolyLine mpl = new MapPolyLine(crds);
+ map.addMapPolygon(mpl);
+ 
+ map.addMapPolygon(zombie);
+ 
+ //testing neigbhours
+ Node testNode = nodes.get(1);
+ MapMarker tnmm = new MapMarkerDot(new Coordinate(testNode.getLat(),testNode.getLon()));
+ map.addMapMarker(tnmm);
+ 
+ for(Node n:testNode.getNeighbours()){
+	 MapMarker foo = new MapMarkerDot(new Coordinate(n.getLat(),n.getLon()));
+	 map.addMapMarker(foo);
+ }*/
+
+//the road
+//MapPolyLine polygon1 = new MapPolyLine(coords);
+//polygon1.setColor(Color.red);
+//polygon1.setBackColor(Color.red);

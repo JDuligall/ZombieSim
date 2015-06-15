@@ -5,7 +5,6 @@
 // Generated on: 2015.05.02 at 06:10:56 PM NZST 
 //
 
-
 package mapContents;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for anonymous complex type.
+ * <p>
+ * Java class for anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType>
@@ -40,105 +41,109 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "tag"
-})
+@XmlType(name = "", propOrder = { "tag", "neighbours" })
 @XmlRootElement(name = "node")
-public class Node
-    extends OsmBasicType
-{
+public class Node extends OsmBasicType {
 
-    protected List<Tag> tag;
-    @XmlAttribute(name = "lat", required = true)
-    protected float lat;
-    @XmlAttribute(name = "lon", required = true)
-    protected float lon;
-    @XmlAttribute(name = "action")
-    protected String action;
+	protected List<Tag> tag;
+	@XmlAttribute(name = "lat", required = true)
+	protected float lat;
+	@XmlAttribute(name = "lon", required = true)
+	protected float lon;
+	@XmlAttribute(name = "action")
+	protected String action;
+	
+	
+	protected ArrayList<Node> neighbours = new ArrayList<Node>();
 
-    /**
-     * Gets the value of the tag property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tag property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTag().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Tag }
-     * 
-     * 
-     */
-    public List<Tag> getTag() {
-        if (tag == null) {
-            tag = new ArrayList<Tag>();
-        }
-        return this.tag;
-    }
+	/**
+	 * Gets the value of the tag property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the tag property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getTag().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link Tag }
+	 * 
+	 * 
+	 */
+	public List<Tag> getTag() {
+		if (tag == null) {
+			tag = new ArrayList<Tag>();
+		}
+		return this.tag;
+	}
 
-    /**
-     * Gets the value of the lat property.
-     * 
-     */
-    public float getLat() {
-        return lat;
-    }
+	/**
+	 * Gets the value of the lat property.
+	 * 
+	 */
+	public float getLat() {
+		return lat;
+	}
 
-    /**
-     * Sets the value of the lat property.
-     * 
-     */
-    public void setLat(float value) {
-        this.lat = value;
-    }
+	/**
+	 * Sets the value of the lat property.
+	 * 
+	 */
+	public void setLat(float value) {
+		this.lat = value;
+	}
 
-    /**
-     * Gets the value of the lon property.
-     * 
-     */
-    public float getLon() {
-        return lon;
-    }
+	/**
+	 * Gets the value of the lon property.
+	 * 
+	 */
+	public float getLon() {
+		return lon;
+	}
 
-    /**
-     * Sets the value of the lon property.
-     * 
-     */
-    public void setLon(float value) {
-        this.lon = value;
-    }
+	/**
+	 * Sets the value of the lon property.
+	 * 
+	 */
+	public void setLon(float value) {
+		this.lon = value;
+	}
 
-    /**
-     * Gets the value of the action property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getAction() {
-        return action;
-    }
+	/**
+	 * Gets the value of the action property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getAction() {
+		return action;
+	}
 
-    /**
-     * Sets the value of the action property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setAction(String value) {
-        this.action = value;
-    }
+	/**
+	 * Sets the value of the action property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setAction(String value) {
+		this.action = value;
+	}
+	
+	public void addNeighbour(Node n){
+		neighbours.add(n);
+	}
+	
+	public ArrayList<Node> getNeighbours(){
+		return neighbours;
+	}
 
 }

@@ -27,7 +27,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
         public void paint(Graphics g, List<Point> points) {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setColor(getColor());
-            g2d.setStroke(new BasicStroke(10));
+            g2d.setStroke(new BasicStroke(1));
             Path2D path = buildPath(points);
             p=path;
             g2d.draw(path);
