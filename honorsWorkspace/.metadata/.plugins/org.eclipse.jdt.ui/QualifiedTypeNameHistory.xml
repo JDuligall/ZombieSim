@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="java.awt.event.WindowAdapter"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.Coordinate"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapPolygonImpl"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="javax.xml.bind.JAXBContext"/>
 <fullyQualifiedTypeName name="javax.xml.bind.Unmarshaller"/>
 <fullyQualifiedTypeName name="mapContents.Osm"/>
@@ -32,7 +31,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="mapDrawable.TestLine"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.interfaces.MapMarker"/>
-<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapMarkerDot"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapMarkerCircle"/>
 <fullyQualifiedTypeName name="java.awt.Graphics"/>
 <fullyQualifiedTypeName name="java.awt.Point"/>
@@ -50,4 +48,7 @@
 <fullyQualifiedTypeName name="utils.LineIterator"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="mapContents.Tag"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="mapDrawable.HumanDot"/>
+<fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapMarkerDot"/>
 </qualifiedTypeNameHistroy>

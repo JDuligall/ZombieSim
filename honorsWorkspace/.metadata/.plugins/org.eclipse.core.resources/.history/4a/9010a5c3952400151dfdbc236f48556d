@@ -67,27 +67,27 @@ public class MapViewer {
 		readOSMFile();
 
 		 
-//		 for(int i = 5000; i < 15000; i++){
-//			 Coordinate crd = new Coordinate(roadNodes.get(i).getLat(),roadNodes.get(i).getLon());
-//			 MapMarker test = new ZombieDot(crd, roadNodes.get(i),map);
-//			 Runnable run = (Runnable)test;
-//			 this.runnables.add(run);
-//			 Thread thread = new Thread((Runnable) test);
-//			 this.threads.add(thread);
-//			 //executorService.submit(run);			 
-//			 map.addMapMarker(test);
-//		 }
-//		
-//		 for(int i = 1000; i < 5000; i++){
-//			 Coordinate crd = new Coordinate(roadNodes.get(i).getLat(),roadNodes.get(i).getLon());
-//			 MapMarker test = new HumanDot(crd, roadNodes.get(i),map);
-//			 Runnable run = (Runnable)test;
-//			 this.runnables.add(run);
-//			 Thread thread = new Thread((Runnable) test);
-//			 this.threads.add(thread);
-//			 //executorService.submit(run);			 
-//			 map.addMapMarker(test);
-//		 }
+		 for(int i = 0; i < 20000; i++){
+			 Coordinate crd = new Coordinate(roadNodes.get(i).getLat(),roadNodes.get(i).getLon());
+			 MapMarker test = new ZombieDot(crd, roadNodes.get(i),map);
+			 Runnable run = (Runnable)test;
+			 this.runnables.add(run);
+			 Thread thread = new Thread((Runnable) test);
+			 this.threads.add(thread);
+			 //executorService.submit(run);			 
+			 map.addMapMarker(test);
+		 }
+		
+		 for(int i = 20000; i < 40000; i++){
+			 Coordinate crd = new Coordinate(roadNodes.get(i).getLat(),roadNodes.get(i).getLon());
+			 MapMarker test = new HumanDot(crd, roadNodes.get(i),map);
+			 Runnable run = (Runnable)test;
+			 this.runnables.add(run);
+			 Thread thread = new Thread((Runnable) test);
+			 this.threads.add(thread);
+			 //executorService.submit(run);			 
+			 map.addMapMarker(test);
+		 }
 		 
 		 //dont render stuff off screen
 		 //dont render past certain zoom level

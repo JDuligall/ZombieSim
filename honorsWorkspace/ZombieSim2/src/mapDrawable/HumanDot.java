@@ -20,7 +20,7 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import utils.LineIterator;
 
-public class ZombieDot extends MapMarkerDot implements Runnable {
+public class HumanDot extends MapMarkerDot implements Runnable {
 
 	private double x;
 	private double y;
@@ -35,7 +35,7 @@ public class ZombieDot extends MapMarkerDot implements Runnable {
 	private boolean newIter;
 	private LineIterator iter;
 
-	public ZombieDot(Coordinate coord, Node node, JMapViewer map) {
+	public HumanDot(Coordinate coord, Node node, JMapViewer map) {
 		super(coord);
 
 		this.curNode = node;
@@ -45,19 +45,18 @@ public class ZombieDot extends MapMarkerDot implements Runnable {
 		this.map = map;
 		this.hasIterated = true;
 		this.newIter = true;
-
 	}
 
 	@Override
 	public void paint(Graphics g, Point position, int radio) {
 		if(this.isVisible()){
 			Graphics2D g2d = (Graphics2D) g.create();
-			// g2d.fill(new Ellipse2D.Double(position.getX()-5, position.getY()-5,
-			// 10, 10));
-			g2d.setColor(Color.GREEN);
+			g2d.setColor(Color.DARK_GRAY);
 			g2d.fill(new Ellipse2D.Double(this.x - 5, this.y - 5, 10, 10));
 			g2d.dispose();
-		}   
+			//g2d.getClipBounds().intersects(r);
+		}
+		
 	}
 
 	@Override
