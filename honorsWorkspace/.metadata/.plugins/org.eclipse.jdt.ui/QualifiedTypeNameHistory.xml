@@ -32,7 +32,6 @@
 <fullyQualifiedTypeName name="mapDrawable.TestLine"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.interfaces.MapMarker"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapMarkerCircle"/>
-<fullyQualifiedTypeName name="java.awt.Graphics"/>
 <fullyQualifiedTypeName name="java.awt.Point"/>
 <fullyQualifiedTypeName name="java.awt.Graphics2D"/>
 <fullyQualifiedTypeName name="java.awt.Composite"/>
@@ -51,4 +50,8 @@
 <fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="mapDrawable.HumanDot"/>
 <fullyQualifiedTypeName name="org.openstreetmap.gui.jmapviewer.MapMarkerDot"/>
+<fullyQualifiedTypeName name="java.awt.Canvas"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="mapDrawable.ZombieCanvas"/>
 </qualifiedTypeNameHistroy>

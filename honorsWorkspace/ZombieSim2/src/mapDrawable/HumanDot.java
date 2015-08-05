@@ -55,6 +55,8 @@ public class HumanDot extends MapMarkerDot implements Runnable {
 			g2d.fill(new Ellipse2D.Double(this.x - 5, this.y - 5, 10, 10));
 			g2d.dispose();
 			//g2d.getClipBounds().intersects(r);
+		}else{
+			this.setVisible(false);
 		}
 		
 	}

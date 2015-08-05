@@ -57,14 +57,16 @@ public class ZombieDot extends MapMarkerDot implements Runnable {
 			g2d.setColor(Color.GREEN);
 			g2d.fill(new Ellipse2D.Double(this.x - 5, this.y - 5, 10, 10));
 			g2d.dispose();
-		}   
+		}else{
+			this.setVisible(false);
+		}
 	}
 
 	@Override
 	public void run() {		
 		// first put zombie in curNodes pos
+		//map.removeMapMarker(this);
 		setLoc(this.lat, this.lon);
-
 		// randomly choose a neighbour
 		if (hasIterated) {
 			ArrayList<Node> curNeighbours = curNode.getNeighbours();
@@ -130,7 +132,7 @@ public class ZombieDot extends MapMarkerDot implements Runnable {
 			}
 
 		}
-
+		//map.addMapMarker(this);
 	}
 
 	// iterate along line to neighbour
