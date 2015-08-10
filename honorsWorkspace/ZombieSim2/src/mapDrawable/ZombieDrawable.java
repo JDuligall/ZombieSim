@@ -34,15 +34,17 @@ public class ZombieDrawable implements Runnable {
 	private Node curNode;
 	private float lat;
 	private float lon;
-	private JMapViewer map;
+	private ZombieMapViewer map;
 	private Node prevNode;
 	private boolean first;
 	private Node toNode;
 	private boolean hasIterated;
 	private boolean newIter;
 	private LineIterator iter;
+	private double speed;
 
-	public ZombieDrawable(Node node, JMapViewer map) {
+
+	public ZombieDrawable(Node node, ZombieMapViewer map) {
 		this.curNode = node;
 		this.prevNode = null;
 		this.lat = node.getLat();
@@ -50,6 +52,7 @@ public class ZombieDrawable implements Runnable {
 		this.map = map;
 		this.hasIterated = true;
 		this.newIter = true;
+		this.speed = 0.000001;
 
 	}
 
@@ -117,7 +120,7 @@ public class ZombieDrawable implements Runnable {
 			if (newIter) {
 				Line2D line = new Line2D.Double(curNode.getLat(),
 						curNode.getLon(), toNode.getLat(), toNode.getLon());
-				iter = new LineIterator(line);
+				iter = new LineIterator(line,map.getSpeed());
 				newIter = false;
 			} else {
 				if (iter.hasNext()) {
@@ -153,7 +156,7 @@ public class ZombieDrawable implements Runnable {
 	// mark neighbour as the one that has just been visited and move to new
 	// neighbour UNLESS only original neighbour, then go back.
 
-	public void setLoc(float lat, float lon) {
+	private void setLoc(float lat, float lon) {
 		Point p = map.getMapPosition(lat, lon);
 		if (p != null) {
 			this.x = p.getX();

@@ -14,6 +14,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -190,31 +192,6 @@ public class MapViewer {
 	}
 
 	private void startSim() {
-//		frame.add(map);
-//		frame.add(jpanel);
-
-//		JLayeredPane mainLayer = new JLayeredPane();
-// 		frame.add(mainLayer, BorderLayout.CENTER);
-//
-//		mainLayer.add(map,1);
-//
-//		ZMV = new ZombieMapViewer();
-		ZMV.setZombies(zombies);
-		ZMV.setOpaque(false);
-
-		ZMV.setDisplayPosition(new Coordinate(-41.299278259277344, 174.7796173095703), 10);
-		frame.add(ZMV);
-//
-////		mainLayer.add(ZMV,2);
-//
-//		frame.pack();
-//		frame.setLocationRelativeTo(null);
-//		frame.setSize(800,800);
-		frame.setVisible(true);
-//		ZMV.repaint();
-//		Graphics g = jpanel.getGraphics();
-//		jpanel.paintComponents(g);
-
 		while(true){
 			step();
 			try {
@@ -231,16 +208,23 @@ public class MapViewer {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 800);
-//		map = new JMapViewer();
-		ZMV = new ZombieMapViewer();
 
-//		jpanel = new JPanel();
-//		jpanel.setSize(frame.getWidth(), frame.getHeight());
-//		jpanel.setOpaque(false);
-//		jpanel.setBackground(new Color(0,0,0));
+		ZMV = new ZombieMapViewer();
+		frame.add(ZMV);
+
+
+//
+//			//TODO figure out why the sliders are not showing
+//
 
 		//TODO set position relative to what has been read in
 //		map.setDisplayPosition(new Coordinate(-41.299278259277344, 174.7796173095703), 10);
+
+
+
+		ZMV.setZombies(zombies);
+		ZMV.setDisplayPosition(new Coordinate(-41.299278259277344, 174.7796173095703), 10);
+		frame.setVisible(true);
 	}
 
 	private void readXML() {
