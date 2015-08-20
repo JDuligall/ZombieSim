@@ -14,11 +14,13 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
+import com.graphhopper.GHRequest;
+import com.graphhopper.GHResponse;
+import com.graphhopper.GraphHopper;
+import com.graphhopper.util.shapes.GHPoint3D;
+import main.MapViewer;
 import mapContents.Node;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -29,6 +31,7 @@ import utils.LineIterator;
 
 public class ZombieDrawable implements Runnable {
 
+	private final GraphHopper hopper;
 	private double x;
 	private double y;
 	private Node curNode;
@@ -42,9 +45,12 @@ public class ZombieDrawable implements Runnable {
 	private boolean newIter;
 	private LineIterator iter;
 	private double speed;
+	private ArrayList<Coordinate> pathCoords;
+	private boolean pathRequested;
 
 
-	public ZombieDrawable(Node node, ZombieMapViewer map) {
+	public ZombieDrawable(Node node, ZombieMapViewer map, GraphHopper hopper) {
+		this.hopper = hopper;
 		this.curNode = node;
 		this.prevNode = null;
 		this.lat = node.getLat();
@@ -53,6 +59,28 @@ public class ZombieDrawable implements Runnable {
 		this.hasIterated = true;
 		this.newIter = true;
 		this.speed = 0.000001;
+		this.pathRequested = false;
+	}
+
+	private void requestPath() {
+		double latFrom = curNode.getLat();
+		double lonFrom = curNode.getLon();
+		double latTo = map.getMyHouse().getLat();
+		double lonTo = map.getMyHouse().getLon();
+		GHRequest req = new GHRequest(latFrom, lonFrom, latTo, lonTo).
+				setWeighting("fastest").
+				setVehicle("car").
+				setLocale(Locale.ENGLISH);
+		GHResponse rsp = hopper.route(req);
+		if(rsp.hasErrors()){
+			System.out.println("errors");
+		}
+		pathCoords = new ArrayList<Coordinate>();
+		for(GHPoint3D p : rsp.getPoints()){
+			pathCoords.add(new Coordinate(p.getLat(),p.getLon()));
+		}
+		//remove the first node as it is the cur node
+		pathCoords.remove(0);
 
 	}
 
@@ -80,6 +108,60 @@ public class ZombieDrawable implements Runnable {
 
 	@Override
 	public void run() {		
+		if(!pathRequested) {
+			requestPath();
+			pathRequested = true;
+		}
+//		randStep();
+		goHomeStep();
+	}
+
+	private void goHomeStep() {
+		// first put zombie in curNodes pos
+		setLoc(this.lat, this.lon);
+
+		// choose a neighbour from the path
+		if (hasIterated) {
+			ArrayList<Node> curNeighbours = curNode.getNeighbours();
+			Coordinate toCoord = pathCoords.get(0);
+				for(Node n : curNeighbours){
+					System.out.println("node: "+n.getLat()+":"+n.getLon());
+					System.out.println("neig: " + toCoord.getLat() +":"+toCoord.getLon());
+
+					if(n.getLat() == (float)toCoord.getLat() && n.getLon() == (float)toCoord.getLon()){
+						this.toNode = n;
+						prevNode = curNode;
+						hasIterated = false;
+						pathCoords.remove(0);
+					}
+				}
+
+
+		} else {
+
+			// draw a line to the neighbour node
+			if (newIter) {
+				Line2D line = new Line2D.Double(curNode.getLat(),
+						curNode.getLon(), toNode.getLat(), toNode.getLon());
+				iter = new LineIterator(line,map.getSpeed());
+				newIter = false;
+			} else {
+				if (iter.hasNext()) {
+					Point2D nextPoint = iter.next();
+					lat = (float) nextPoint.getX();
+					lon = (float) nextPoint.getY();
+					// System.out.println(lat + "     " + lon);
+				} else {
+					newIter = true;
+					hasIterated = true;
+					curNode = toNode;
+				}
+
+			}
+		}
+	}
+
+	private void randStep(){
 		// first put zombie in curNodes pos
 		//map.removeMapMarker(this);
 		setLoc(this.lat, this.lon);

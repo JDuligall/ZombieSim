@@ -4,11 +4,8 @@ import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,6 +17,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import com.graphhopper.GHRequest;
+import com.graphhopper.GHResponse;
+import com.graphhopper.GraphHopper;
+import com.graphhopper.routing.util.EncodingManager;
+import com.graphhopper.util.shapes.GHPoint3D;
 import mapContents.Nd;
 import mapContents.Node;
 import mapContents.Osm;
@@ -32,7 +34,9 @@ import mapDrawable.ZombieDot;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+import sun.java2d.opengl.WGLSurfaceData;
 
 public class MapViewer {
 
@@ -51,9 +55,12 @@ public class MapViewer {
 	private JPanel jpanel;
 	private ArrayList<ZombieDrawable> zombies = new ArrayList<ZombieDrawable>();
 	private ZombieMapViewer ZMV;
+	private GraphHopper hopper;
+	private String osmFile;
 
 	public MapViewer(){
 
+		osmFile = "../../mapFiles/myHouse1.osm";
 		param = null;
 		nodes = new ArrayList<Node>();
 		roadNodes = new ArrayList<Node>();
@@ -65,30 +72,69 @@ public class MapViewer {
 		System.out.println(threads);
 		executorService = Executors.newFixedThreadPool(threads);
 
+
+
 		setUpFrame();
 		readXML();
 		doStuffTest();
 
 	}
 
+	private void setUpHopper() {
+		hopper = new GraphHopper().forServer();
+		hopper.setOSMFile(osmFile);
+
+		hopper.setGraphHopperLocation("hoppperFiles");
+		hopper.setEncodingManager(new EncodingManager("car"));
+
+		hopper.importOrLoad();
+
+
+//		double latFrom = test1.getLat();
+//		double lonFrom = test1.getLon();
+//		double latTo = test2.getLat();
+//		double lonTo = test2.getLon();
+//		GHRequest req = new GHRequest(latFrom, lonFrom, latTo, lonTo).
+//				setWeighting("fastest").
+//				setVehicle("car").
+//				setLocale(Locale.ENGLISH);
+//		GHResponse rsp = hopper.route(req);
+//		if(rsp.hasErrors()){
+//			System.out.println("errors");
+//		}
+//
+//		double distance = rsp.getDistance();
+//		System.out.println(distance);
+//
+//		ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
+//		for(GHPoint3D p : rsp.getPoints()){
+//			coords.add(new Coordinate(p.getLat(),p.getLon()));
+//		}
+//		MapPolygonImpl poly = new MapPolygonImpl(coords);
+//		ZMV.addMapPolygon(poly);
+
+
+	}
+
 	private void doStuffTest() {
 		 readOSMFile();
 //		 loadZombiesAsMapMarkers();
+		 setUpHopper();
 		 loadZombiesOnCanvas();
 		 startSim();
 
 	}
 
 	public void loadZombiesOnCanvas(){
-		for(int j = 0; j < 5; j++) {
-			for (int i = 0; i < 2000; i++) {
-				ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(i), ZMV);
+//		for(int j = 0; j < 5; j++) {
+			for (int i = 0; i < 1; i++) {
+				ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(i), ZMV, hopper);
 				this.zombies.add(zomb);
 //			 Thread thread = new Thread((Runnable) zomb);
 //			 this.threads.add(thread);
 				//executorService.submit(run);
 			}
-		}
+//		}
 	}
 
 	public void loadZombiesAsMapMarkers(){
@@ -192,6 +238,20 @@ public class MapViewer {
 	}
 
 	private void startSim() {
+
+//		Node myHouse = roadNodes.get(782);
+//		for(Node n :roadNodes){
+//			if(n.getId().intValue() == 36154753){
+//				myHouse=n;
+//				System.out.println(roadNodes.indexOf(n));
+//			}
+//		}
+
+//		setUpHopper(roadNodes.get(0),myHouse);
+
+		ZMV.setMyHouse(roadNodes.get(782));
+
+
 		while(true){
 			step();
 			try {
@@ -232,7 +292,7 @@ public class MapViewer {
 			JAXBContext context = JAXBContext.newInstance(Osm.class);
 			Unmarshaller unMarshaller = context.createUnmarshaller();
 			param = (Osm) unMarshaller.unmarshal(new FileInputStream(
-					"../../mapFiles/myHouse1.osm"));
+					osmFile));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

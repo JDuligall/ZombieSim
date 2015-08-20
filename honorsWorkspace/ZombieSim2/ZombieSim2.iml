@@ -23,5 +23,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="graphhopper-web-0.5.0-with-dep" level="project" />
   </component>
 </module>

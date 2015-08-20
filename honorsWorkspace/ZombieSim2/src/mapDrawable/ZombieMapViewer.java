@@ -1,6 +1,7 @@
 package mapDrawable;
 
 import com.sun.corba.se.impl.orbutil.graph.Graph;
+import mapContents.Node;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 
 import javax.swing.*;
@@ -21,10 +22,9 @@ public class ZombieMapViewer extends JMapViewer {
     private final JLabel text;
     private ArrayList<ZombieDrawable> zombies = new ArrayList<ZombieDrawable>();
     private double speed;
-
+    private Node myHouse;
 
     public ZombieMapViewer(){
-
         this.speed = 0.000001;
 
         testSlider = new JSlider(0, 9);
@@ -79,6 +79,14 @@ public class ZombieMapViewer extends JMapViewer {
 
     public double getSpeed(){
         return this.speed;
+    }
+
+    public void setMyHouse(Node myHouse){
+        this.myHouse = myHouse;
+    }
+
+    public Node getMyHouse(){
+        return this.myHouse;
     }
 
 

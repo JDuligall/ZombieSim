@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="graphhopper-web-0.5.0-with-dep">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../graphhopper-web-0.5.0-bin/graphhopper-web-0.5.0-with-dep.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
