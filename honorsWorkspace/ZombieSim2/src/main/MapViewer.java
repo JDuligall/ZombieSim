@@ -126,15 +126,15 @@ public class MapViewer {
 	}
 
 	public void loadZombiesOnCanvas(){
-//		for(int j = 0; j < 5; j++) {
-			for (int i = 0; i < 1; i++) {
+		for(int j = 0; j < 2; j++) {
+			for (int i = 0; i < 2000; i++) {
 				ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(i), ZMV, hopper);
 				this.zombies.add(zomb);
 //			 Thread thread = new Thread((Runnable) zomb);
 //			 this.threads.add(thread);
 				//executorService.submit(run);
 			}
-//		}
+		}
 	}
 
 	public void loadZombiesAsMapMarkers(){

@@ -49,6 +49,12 @@ public class ZombieDrawable implements Runnable {
 	private boolean pathRequested;
 
 
+
+	private Coordinate toCoord;
+	private Coordinate curCoord;
+
+
+
 	public ZombieDrawable(Node node, ZombieMapViewer map, GraphHopper hopper) {
 		this.hopper = hopper;
 		this.curNode = node;
@@ -80,7 +86,7 @@ public class ZombieDrawable implements Runnable {
 			pathCoords.add(new Coordinate(p.getLat(),p.getLon()));
 		}
 		//remove the first node as it is the cur node
-		pathCoords.remove(0);
+		curCoord = 	pathCoords.remove(0);
 
 	}
 
@@ -109,8 +115,8 @@ public class ZombieDrawable implements Runnable {
 	@Override
 	public void run() {		
 		if(!pathRequested) {
-			requestPath();
 			pathRequested = true;
+			requestPath();
 		}
 //		randStep();
 		goHomeStep();
@@ -122,27 +128,15 @@ public class ZombieDrawable implements Runnable {
 
 		// choose a neighbour from the path
 		if (hasIterated) {
-			ArrayList<Node> curNeighbours = curNode.getNeighbours();
-			Coordinate toCoord = pathCoords.get(0);
-				for(Node n : curNeighbours){
-					System.out.println("node: "+n.getLat()+":"+n.getLon());
-					System.out.println("neig: " + toCoord.getLat() +":"+toCoord.getLon());
-
-					if(n.getLat() == (float)toCoord.getLat() && n.getLon() == (float)toCoord.getLon()){
-						this.toNode = n;
-						prevNode = curNode;
-						hasIterated = false;
-						pathCoords.remove(0);
-					}
-				}
-
+			toCoord = pathCoords.remove(0);
+			hasIterated = false;
 
 		} else {
 
 			// draw a line to the neighbour node
 			if (newIter) {
-				Line2D line = new Line2D.Double(curNode.getLat(),
-						curNode.getLon(), toNode.getLat(), toNode.getLon());
+				Line2D line = new Line2D.Double(curCoord.getLat(),
+						curCoord.getLon(), toCoord.getLat(), toCoord.getLon());
 				iter = new LineIterator(line,map.getSpeed());
 				newIter = false;
 			} else {
@@ -154,7 +148,7 @@ public class ZombieDrawable implements Runnable {
 				} else {
 					newIter = true;
 					hasIterated = true;
-					curNode = toNode;
+					curCoord = toCoord;
 				}
 
 			}
