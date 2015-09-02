@@ -12,6 +12,7 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.text.AttributedCharacterIterator;
 import java.util.*;
@@ -29,7 +30,7 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import utils.LineIterator;
 
-public class ZombieDrawable implements Runnable {
+public class ZombieDrawable extends Ellipse2D implements Runnable {
 
 	private final GraphHopper hopper;
 	private double x;
@@ -44,7 +45,6 @@ public class ZombieDrawable implements Runnable {
 	private boolean hasIterated;
 	private boolean newIter;
 	private LineIterator iter;
-	private double speed;
 	private ArrayList<Coordinate> pathCoords;
 	private boolean pathRequested;
 
@@ -52,7 +52,7 @@ public class ZombieDrawable implements Runnable {
 
 	private Coordinate toCoord;
 	private Coordinate curCoord;
-
+	private boolean clicked;
 
 
 	public ZombieDrawable(Node node, ZombieMapViewer map, GraphHopper hopper) {
@@ -64,7 +64,6 @@ public class ZombieDrawable implements Runnable {
 		this.map = map;
 		this.hasIterated = true;
 		this.newIter = true;
-		this.speed = 0.000001;
 		this.pathRequested = false;
 	}
 
@@ -79,7 +78,7 @@ public class ZombieDrawable implements Runnable {
 				setLocale(Locale.ENGLISH);
 		GHResponse rsp = hopper.route(req);
 		if(rsp.hasErrors()){
-			System.out.println("errors");
+//			System.out.println("errors");
 		}
 		pathCoords = new ArrayList<Coordinate>();
 		for(GHPoint3D p : rsp.getPoints()){
@@ -95,21 +94,18 @@ public class ZombieDrawable implements Runnable {
 //		int w = map.getWidth();
 
 		if(x != -1 && y != -1 ) {
+			if(clicked){
+				gra.setColor(Color.red);
+				gra.fillOval((int) this.x - 6, (int) this.y - 6, 12, 12);
+			}
+//			gra.setColor(Color.green);
+//			gra.fillOval();
 			gra.setColor(Color.DARK_GRAY);
 			gra.fillOval((int) this.x - 5, (int) this.y - 5, 10, 10);
+
+//			gra.setColor(Color.red);
+//			gra
 		}
-	}
-	
-	public void paint(Graphics gra, int width, int height) {
-//		if(this.x > 0 && this.x < width && this.y > 0 && this.y < height) {
-			//Graphics2D g2d = (Graphics2D) g.create();
-			// g2d.fill(new Ellipse2D.Double(position.getX()-5, position.getY()-5,
-			// 10, 10));
-			gra.setColor(Color.DARK_GRAY);
-			//gra.fill(new Ellipse2D.Double(this.x - 5, this.y - 5, 10, 10));
-			gra.fillOval((int) this.x - 5, (int) this.y - 5, 10, 10);
-//			gra.fillOval(10,10,10,10);
-//		}
 	}
 
 	@Override
@@ -118,8 +114,8 @@ public class ZombieDrawable implements Runnable {
 			pathRequested = true;
 			requestPath();
 		}
-//		randStep();
-		goHomeStep();
+		randStep();
+//		goHomeStep();
 	}
 
 	private void goHomeStep() {
@@ -243,4 +239,47 @@ public class ZombieDrawable implements Runnable {
 		}
 	}
 
+	public boolean isClicked (double clickX, double clickY){
+		return (this.x-5 <= clickX && clickX <= this.x+5 && this.y-5 <= clickY && clickY <= this.y+5);
+	}
+
+
+	@Override
+	public double getX() {
+		return this.x;
+	}
+
+	@Override
+	public double getY() {
+		return this.y;
+	}
+
+	@Override
+	public double getWidth() {
+		return 10;
+	}
+
+	@Override
+	public double getHeight() {
+		return 10;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return false;
+	}
+
+	@Override
+	public void setFrame(double x, double y, double w, double h) {
+
+	}
+
+	@Override
+	public Rectangle2D getBounds2D() {
+		return null;
+	}
+
+	public void setClicked(boolean clicked) {
+		this.clicked = clicked;
+	}
 }

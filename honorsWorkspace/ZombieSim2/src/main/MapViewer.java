@@ -60,7 +60,7 @@ public class MapViewer {
 
 	public MapViewer(){
 
-		osmFile = "../../mapFiles/myHouse1.osm";
+		osmFile = "assets/myHouse1.osm";
 		param = null;
 		nodes = new ArrayList<Node>();
 		roadNodes = new ArrayList<Node>();
@@ -126,7 +126,7 @@ public class MapViewer {
 	}
 
 	public void loadZombiesOnCanvas(){
-		for(int j = 0; j < 2; j++) {
+		for(int j = 0; j < 5     ; j++) {
 			for (int i = 0; i < 2000; i++) {
 				ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(i), ZMV, hopper);
 				this.zombies.add(zomb);

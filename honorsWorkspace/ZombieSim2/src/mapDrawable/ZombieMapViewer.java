@@ -8,6 +8,9 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.image.BufferedImage;
@@ -16,7 +19,7 @@ import java.awt.image.BufferedImage;
 /**
  * Created by Jacob on 29/07/2015.
  */
-public class ZombieMapViewer extends JMapViewer {
+public class ZombieMapViewer extends JMapViewer{
 
     private final JSlider testSlider;
     private final JLabel text;
@@ -25,9 +28,10 @@ public class ZombieMapViewer extends JMapViewer {
     private Node myHouse;
 
     public ZombieMapViewer(){
-        this.speed = 0.000001;
+//        this.speed = 0.000001;
+        this.speed = 0.0000002;
 
-        testSlider = new JSlider(0, 9);
+        testSlider = new JSlider(0, 9, 1);
         testSlider.setOrientation(JSlider.HORIZONTAL);
         testSlider.setBounds(100, 10, 150, 20);
         testSlider.setOpaque(false);
@@ -45,6 +49,22 @@ public class ZombieMapViewer extends JMapViewer {
         text.setText("Zombie Speed");
         text.setBounds(130, 15, 100, 50);
 
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if(e.getButton() == 1) {
+                    for (ZombieDrawable zomb : zombies) {
+                        if(zomb.isClicked(e.getX(),e.getY())){
+                            System.out.println(e.getX()+" "+e.getY());
+                            zomb.setClicked(true);
+                            return;
+                        }
+                    }
+                }
+            }
+        });
 
 
         add(text);
@@ -97,6 +117,7 @@ public class ZombieMapViewer extends JMapViewer {
 //            if the zombie isn't on the screen, somehow don't paint it?
 //            zomb.paint(g, this.getWidth(), this.getHeight());
             zomb.paint(g);
+
         }
 //        g.dispose();
     }
