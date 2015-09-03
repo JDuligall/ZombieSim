@@ -26,6 +26,7 @@ public class ZombieMapViewer extends JMapViewer{
     private ArrayList<ZombieDrawable> zombies = new ArrayList<ZombieDrawable>();
     private double speed;
     private Node myHouse;
+    private ZombieDrawable selected = null;
 
     public ZombieMapViewer(){
 //        this.speed = 0.000001;
@@ -56,9 +57,12 @@ public class ZombieMapViewer extends JMapViewer{
                 super.mouseClicked(e);
                 if(e.getButton() == 1) {
                     for (ZombieDrawable zomb : zombies) {
-                        if(zomb.isClicked(e.getX(),e.getY())){
-                            System.out.println(e.getX()+" "+e.getY());
+                        if(zomb.isClicked(e.getX(), e.getY())){
                             zomb.setClicked(true);
+                            if(selected != null){
+                                selected.setClicked(false);
+                            }
+                            selected = zomb;
                             return;
                         }
                     }
@@ -112,12 +116,26 @@ public class ZombieMapViewer extends JMapViewer{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+
         for(ZombieDrawable zomb: zombies){
 //            if(this.)
 //            if the zombie isn't on the screen, somehow don't paint it?
 //            zomb.paint(g, this.getWidth(), this.getHeight());
             zomb.paint(g);
 
+        }
+        if(selected!=null){
+            g.setColor(Color.white);
+            g.fillRect(10, 200, 75, 120);
+
+            g.setColor(Color.black);
+            g.drawString(selected.getFirstName() + "" , 20, 215);
+            g.drawString(""+selected.getLastName(), 20, 230);
+            g.drawString("Gender: "+selected.getGender(), 20, 245);
+            g.drawString("Lat:", 20, 260);
+            g.drawString(""+selected.lat,20,275);
+            g.drawString("Lon:",20,290);
+            g.drawString(""+selected.lon,20,305);
         }
 //        g.dispose();
     }

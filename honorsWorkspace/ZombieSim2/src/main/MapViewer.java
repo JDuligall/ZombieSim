@@ -37,6 +37,7 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import sun.java2d.opengl.WGLSurfaceData;
+import utils.NameGenerator;
 
 public class MapViewer {
 
@@ -46,7 +47,7 @@ public class MapViewer {
 	private JFrame frame;
 	private Osm param;
 	private HashMap<BigInteger, Coordinate> locations;
-	private HashMap<Way,ArrayList<Nd>> ways;
+	private HashMap<Way, ArrayList<Nd>> ways;
 	private ArrayList<Node> nodes;
 	private ArrayList<Node> roadNodes;
 	ExecutorService executorService;
@@ -57,21 +58,22 @@ public class MapViewer {
 	private ZombieMapViewer ZMV;
 	private GraphHopper hopper;
 	private String osmFile;
+	private Random randomGen;
 
-	public MapViewer(){
+	public MapViewer() {
 
 		osmFile = "assets/myHouse1.osm";
 		param = null;
 		nodes = new ArrayList<Node>();
 		roadNodes = new ArrayList<Node>();
 		locations = new HashMap<BigInteger, Coordinate>();
-		ways = new HashMap<Way,ArrayList<Nd>>();
+		ways = new HashMap<Way, ArrayList<Nd>>();
 		refNodes = new HashMap<BigInteger, Node>();
+		randomGen = new Random();
 
 		int threads = Runtime.getRuntime().availableProcessors();
-		System.out.println(threads);
+//		System.out.println(threadsy);
 		executorService = Executors.newFixedThreadPool(threads);
-
 
 
 		setUpFrame();
@@ -117,18 +119,27 @@ public class MapViewer {
 	}
 
 	private void doStuffTest() {
-		 readOSMFile();
+		readOSMFile();
 //		 loadZombiesAsMapMarkers();
-		 setUpHopper();
-		 loadZombiesOnCanvas();
-		 startSim();
+		setUpHopper();
+		loadZombiesOnCanvas();
+		startSim();
 
 	}
 
-	public void loadZombiesOnCanvas(){
-		for(int j = 0; j < 5     ; j++) {
+	public void loadZombiesOnCanvas() {
+		NameGenerator nameGen = new NameGenerator();
+		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < 2000; i++) {
 				ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(i), ZMV, hopper);
+				if(randomGen.nextBoolean()){
+					zomb.setFirstName(nameGen.getBoyName());
+					zomb.setGender("m");
+				}else {
+					zomb.setFirstName(nameGen.getGirlName());
+					zomb.setGender("f");
+				}
+				zomb.setLastName(nameGen.getSurname());
 				this.zombies.add(zomb);
 //			 Thread thread = new Thread((Runnable) zomb);
 //			 this.threads.add(thread);
@@ -137,32 +148,6 @@ public class MapViewer {
 		}
 	}
 
-	public void loadZombiesAsMapMarkers(){
-		 for(int i = 0; i < 1000; i++){
-			 Coordinate crd = new Coordinate(roadNodes.get(i).getLat(),roadNodes.get(i).getLon());
-			 MapMarker test = new ZombieDot(crd, roadNodes.get(i),map);
-			 Runnable run = (Runnable)test;
-			 this.runnables.add(run);
-//			 Thread thread = new Thread((Runnable) test);
-//			 this.threads.add(thread);
-			 //executorService.submit(run);
-			 map.addMapMarker(test);
-		 }
-
-		 for(int i = 1000; i < 2000; i++){
-			 Coordinate crd = new Coordinate(roadNodes.get(i).getLat(),roadNodes.get(i).getLon());
-			 MapMarker test = new HumanDot(crd, roadNodes.get(i),map);
-			 Runnable run = (Runnable)test;
-			 this.runnables.add(run);
-//			 Thread thread = new Thread((Runnable) test);
-//			 this.threads.add(thread);
-			 //executorService.submit(run);
-			 map.addMapMarker(test);
-		 }
-
-		 //dont render stuff off screen
-		 //dont render past certain zoom level
-	}
 
 	private void readOSMFile() {
 		// read through the OSM file to get the contents
@@ -173,9 +158,9 @@ public class MapViewer {
 			Boolean isRoad = false;
 			//if its a node then store in the nodes list.
 			if (cur.getClass().equals((mapContents.Node.class))) {
-				Node curNode = (Node)cur;
+				Node curNode = (Node) cur;
 				refNodes.put(curNode.getId(), curNode);
-				locations.put(curNode.getId(), new Coordinate(curNode.getLat(),curNode.getLon()));
+				locations.put(curNode.getId(), new Coordinate(curNode.getLat(), curNode.getLon()));
 				nodes.add(curNode);
 
 			} else if (cur.getClass().equals((mapContents.Way.class))) {
@@ -189,12 +174,12 @@ public class MapViewer {
 				for (int j = 0; j < wayNodes.size(); j++) {
 					Object current = wayNodes.get(j);
 
-					if(current.getClass().equals(mapContents.Nd.class)){
+					if (current.getClass().equals(mapContents.Nd.class)) {
 
-						Nd curNd = (Nd)current;
+						Nd curNd = (Nd) current;
 						nds.add(curNd);
 
-					}else if (current.getClass().equals(Tag.class)) {
+					} else if (current.getClass().equals(Tag.class)) {
 						Tag t = (Tag) wayNodes.get(j);
 						if (t.getK().equals("highway")) {
 							//Then these nodes can be added to the list.
@@ -203,38 +188,38 @@ public class MapViewer {
 					}
 
 				}
-				if(isRoad){
-					for(Nd nd: nds){
+				if (isRoad) {
+					for (Nd nd : nds) {
 						roadNodes.add(refNodes.get(nd.getRef()));
 					}
 				}
-				ways.put(way,nds);
+				ways.put(way, nds);
 			}
 		}
 
 		//iterate through ways and set each node to have its neighbours
-		 Iterator waysIt = ways.entrySet().iterator();
-		 while(waysIt.hasNext()){
-			 Map.Entry pair = (Entry) waysIt.next();
-			 ArrayList<Nd> pairNds = (ArrayList<Nd>) pair.getValue();
+		Iterator waysIt = ways.entrySet().iterator();
+		while (waysIt.hasNext()) {
+			Map.Entry pair = (Entry) waysIt.next();
+			ArrayList<Nd> pairNds = (ArrayList<Nd>) pair.getValue();
 
-			 for(int i = 0; i < pairNds.size(); i++){
-				 BigInteger ref = pairNds.get(i).getRef();
+			for (int i = 0; i < pairNds.size(); i++) {
+				BigInteger ref = pairNds.get(i).getRef();
 
-				 Node n = refNodes.get(ref);
+				Node n = refNodes.get(ref);
 
-				 if(0 < i){
-					 BigInteger n1Ref = pairNds.get(i-1).getRef();
-					 n.addNeighbour(refNodes.get(n1Ref));
-				 }
+				if (0 < i) {
+					BigInteger n1Ref = pairNds.get(i - 1).getRef();
+					n.addNeighbour(refNodes.get(n1Ref));
+				}
 
-				 if(i <= pairNds.size()-2){
-					 BigInteger n2Ref = pairNds.get(i+1).getRef();
-					 n.addNeighbour(refNodes.get(n2Ref));
-				 }
+				if (i <= pairNds.size() - 2) {
+					BigInteger n2Ref = pairNds.get(i + 1).getRef();
+					n.addNeighbour(refNodes.get(n2Ref));
+				}
 
-			 }
-		 }
+			}
+		}
 	}
 
 	private void startSim() {
@@ -252,7 +237,7 @@ public class MapViewer {
 		ZMV.setMyHouse(roadNodes.get(782));
 
 
-		while(true){
+		while (true) {
 			step();
 			try {
 				Thread.sleep(10);
@@ -281,7 +266,6 @@ public class MapViewer {
 //		map.setDisplayPosition(new Coordinate(-41.299278259277344, 174.7796173095703), 10);
 
 
-
 		ZMV.setZombies(zombies);
 		ZMV.setDisplayPosition(new Coordinate(-41.299278259277344, 174.7796173095703), 10);
 		frame.setVisible(true);
@@ -303,11 +287,11 @@ public class MapViewer {
 	}
 
 
-	public void step(){
+	public void step() {
 		//go through the list of runnables and get them to update the position and repaint them.
 
 //		Graphics g = jpanel.getGraphics();
-		for(ZombieDrawable zomb : zombies){
+		for (ZombieDrawable zomb : zombies) {
 			executorService.submit(zomb);
 		}
 //		map.repaint();
@@ -317,34 +301,60 @@ public class MapViewer {
 		ZMV.repaint();
 //		ZMV.doPaint();
 	}
-	
+
+
+	public static void main(String[] args) {
+		new MapViewer();
+	}
+
+
+//================OLD======================================================================================
+
+
+	public void loadZombiesAsMapMarkers() {
+		for (int i = 0; i < 1000; i++) {
+			Coordinate crd = new Coordinate(roadNodes.get(i).getLat(), roadNodes.get(i).getLon());
+			MapMarker test = new ZombieDot(crd, roadNodes.get(i), map);
+			Runnable run = (Runnable) test;
+			this.runnables.add(run);
+//			 Thread thread = new Thread((Runnable) test);
+//			 this.threads.add(thread);
+			//executorService.submit(run);
+			map.addMapMarker(test);
+		}
+
+		for (int i = 1000; i < 2000; i++) {
+			Coordinate crd = new Coordinate(roadNodes.get(i).getLat(), roadNodes.get(i).getLon());
+			MapMarker test = new HumanDot(crd, roadNodes.get(i), map);
+			Runnable run = (Runnable) test;
+			this.runnables.add(run);
+//			 Thread thread = new Thread((Runnable) test);
+//			 this.threads.add(thread);
+			//executorService.submit(run);
+			map.addMapMarker(test);
+		}
+
+		//dont render stuff off screen
+		//dont render past certain zoom level
+	}
+
 	//Origial step, for zombie map markers.
-	public void step1(){
+	public void step1() {
 //		for(Thread t : threads){
 //			t.run();
 //			map.repaint();
 //		}
-		for(Runnable r : runnables){
+		for (Runnable r : runnables) {
 			executorService.submit(r);
 			//if(((MapMarker)r).isVisible()){
 			map.repaint();
 			//}
 			//if(map.getZoom() > 15){
-				//map.repaint(0, 0, frame.getWidth(), frame.getHeight());
+			//map.repaint(0, 0, frame.getWidth(), frame.getHeight());
 			//}
 		}
 	}
-	
-	public static void main(String[] args) {
-		new MapViewer();
-	}
-	
 }
-
-
-
-
-
 
 //STUFF THAT WAS UNDER readOSMFile()=========================================================================================
 

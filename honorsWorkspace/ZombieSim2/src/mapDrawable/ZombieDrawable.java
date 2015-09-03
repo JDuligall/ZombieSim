@@ -30,23 +30,26 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 
 import utils.LineIterator;
 
-public class ZombieDrawable extends Ellipse2D implements Runnable {
+public class ZombieDrawable  implements Runnable {
 
 	private final GraphHopper hopper;
 	private double x;
 	private double y;
 	private Node curNode;
-	private float lat;
-	private float lon;
+	public float lat;
+	public float lon;
 	private ZombieMapViewer map;
 	private Node prevNode;
-	private boolean first;
 	private Node toNode;
 	private boolean hasIterated;
 	private boolean newIter;
 	private LineIterator iter;
 	private ArrayList<Coordinate> pathCoords;
 	private boolean pathRequested;
+
+	private String firstName;
+	private String lastName;
+	private String gender;
 
 
 
@@ -243,43 +246,31 @@ public class ZombieDrawable extends Ellipse2D implements Runnable {
 		return (this.x-5 <= clickX && clickX <= this.x+5 && this.y-5 <= clickY && clickY <= this.y+5);
 	}
 
-
-	@Override
-	public double getX() {
-		return this.x;
-	}
-
-	@Override
-	public double getY() {
-		return this.y;
-	}
-
-	@Override
-	public double getWidth() {
-		return 10;
-	}
-
-	@Override
-	public double getHeight() {
-		return 10;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return false;
-	}
-
-	@Override
-	public void setFrame(double x, double y, double w, double h) {
-
-	}
-
-	@Override
-	public Rectangle2D getBounds2D() {
-		return null;
-	}
-
 	public void setClicked(boolean clicked) {
 		this.clicked = clicked;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 }

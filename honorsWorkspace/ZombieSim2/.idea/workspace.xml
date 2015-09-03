@@ -7,9 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d65cc8df-8117-40ca-8f06-928d68ed145e" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/NameGenerator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_lang3_3_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/firstNames.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/lastNames.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/MapViewer.java" afterPath="$PROJECT_DIR$/src/main/MapViewer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mapDrawable/ZombieDrawable.java" afterPath="$PROJECT_DIR$/src/mapDrawable/ZombieDrawable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mapDrawable/ZombieMapViewer.java" afterPath="$PROJECT_DIR$/src/mapDrawable/ZombieMapViewer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ZombieSim2.iml" afterPath="$PROJECT_DIR$/ZombieSim2.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ZombieSim2.iws" />
@@ -36,11 +41,17 @@
         <entry file="file://$PROJECT_DIR$/src/main/MapViewer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
+              <caret line="139" column="40" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
               <folding>
-                <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+                <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+                <element signature="e#2706#2742#0" expanded="false" />
                 <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-                <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+                <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+                <element signature="e#6284#6322#0" expanded="false" />
+                <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+                <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+                <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+                <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,14 +60,25 @@
       <file leaf-file-name="ZombieMapViewer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mapDrawable/ZombieMapViewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6912929">
-              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6741425">
+              <caret line="62" column="57" selection-start-line="62" selection-start-column="57" selection-end-line="62" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2921#2922#0" expanded="true" />
-                <element signature="e#2956#2957#0" expanded="true" />
-                <element signature="e#3370#3371#0" expanded="true" />
-                <element signature="e#3408#3409#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NameGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/NameGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#370#378#0" expanded="true" />
+                <element signature="e#436#444#0" expanded="true" />
+                <element signature="e#498#506#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,36 +87,16 @@
       <file leaf-file-name="ZombieDrawable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mapDrawable/ZombieDrawable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.142858">
-              <caret line="98" column="71" selection-start-line="98" selection-start-column="71" selection-end-line="98" selection-end-column="71" />
+            <state vertical-scroll-proportion="37.77778">
+              <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
               <folding>
                 <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
                 <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-                <element signature="e#6157#6158#0" expanded="true" />
-                <element signature="e#6177#6178#0" expanded="true" />
-                <element signature="e#6213#6214#0" expanded="true" />
-                <element signature="e#6233#6234#0" expanded="true" />
-                <element signature="e#6273#6274#0" expanded="true" />
-                <element signature="e#6289#6290#0" expanded="true" />
-                <element signature="e#6330#6331#0" expanded="true" />
-                <element signature="e#6346#6347#0" expanded="true" />
-                <element signature="e#6386#6387#0" expanded="true" />
-                <element signature="e#6405#6406#0" expanded="true" />
-                <element signature="e#6533#6534#0" expanded="true" />
-                <element signature="e#6551#6552#0" expanded="true" />
-                <element signature="e#6595#6596#0" expanded="true" />
-                <element signature="e#6624#6625#0" expanded="true" />
+                <element signature="e#6524#6525#0" expanded="true" />
+                <element signature="e#6544#6545#0" expanded="true" />
+                <element signature="e#6585#6586#0" expanded="true" />
+                <element signature="e#6612#6613#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mapContents/Node.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="16" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="19" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -127,6 +129,7 @@
         <option value="$PROJECT_DIR$/src/utils/AStar.java" />
         <option value="$PROJECT_DIR$/src/mapContents/Node.java" />
         <option value="$PROJECT_DIR$/src/main/MapViewer.java" />
+        <option value="$PROJECT_DIR$/src/utils/NameGenerator.java" />
         <option value="$PROJECT_DIR$/src/mapDrawable/ZombieDrawable.java" />
         <option value="$PROJECT_DIR$/src/mapDrawable/ZombieMapViewer.java" />
       </list>
@@ -166,16 +169,13 @@
     <panes>
       <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="ZombieSim2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -220,53 +220,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ZombieSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ZombieSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapDrawable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ZombieSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ZombieSim2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mapContents" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LIBS/commons-lang3-3.4.jar!/" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -443,7 +406,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.101372756" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36430833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -465,7 +428,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="18" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -474,22 +437,20 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/mapContents/Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/MapViewer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -500,10 +461,6 @@
           <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -515,20 +472,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -537,7 +484,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="16" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -546,9 +492,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -559,10 +511,6 @@
           <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -574,20 +522,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -596,7 +534,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="16" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -605,9 +542,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -618,10 +561,6 @@
           <caret line="24" column="11" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -633,20 +572,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,7 +584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="16" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -664,9 +592,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -677,10 +611,6 @@
           <caret line="63" column="41" selection-start-line="63" selection-start-column="41" selection-end-line="63" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -692,20 +622,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -715,9 +635,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -728,10 +654,6 @@
           <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -743,20 +665,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -766,9 +678,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -779,10 +697,6 @@
           <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -794,20 +708,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -817,9 +721,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -830,10 +740,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -845,20 +751,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -868,9 +764,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="214" column="0" selection-start-line="214" selection-start-column="0" selection-end-line="214" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -881,10 +783,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -896,20 +794,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -926,9 +814,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="270" column="5" selection-start-line="270" selection-start-column="5" selection-end-line="270" selection-end-column="5" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -939,10 +833,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -954,20 +844,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -984,9 +864,15 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -997,10 +883,6 @@
           <caret line="15" column="42" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1012,20 +894,10 @@
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1101,7 +973,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13953489">
           <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1109,65 +980,68 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.2757256">
           <caret line="13" column="52" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="52" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapContents/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13456464">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/MapViewer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
+          <caret line="139" column="40" selection-start-line="139" selection-start-column="40" selection-end-line="139" selection-end-column="40" />
           <folding>
-            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#setUpHopper#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#2706#2742#0" expanded="false" />
             <element signature="method#readOSMFile#0;class#MapViewer#0" expanded="false" />
-            <element signature="method#step1#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#startSim#0;class#MapViewer#0" expanded="false" />
+            <element signature="e#6284#6322#0" expanded="false" />
+            <element signature="method#setUpFrame#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#readXML#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#step#0;class#MapViewer#0" expanded="false" />
+            <element signature="method#loadZombiesAsMapMarkers#0;class#MapViewer#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mapContents/Node.java">
+    <entry file="file://$PROJECT_DIR$/src/utils/NameGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="19" />
-          <folding />
+          <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#370#378#0" expanded="true" />
+            <element signature="e#436#444#0" expanded="true" />
+            <element signature="e#498#506#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapDrawable/ZombieDrawable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.142858">
-          <caret line="98" column="71" selection-start-line="98" selection-start-column="71" selection-end-line="98" selection-end-column="71" />
+        <state vertical-scroll-proportion="37.77778">
+          <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
           <folding>
             <element signature="method#goHomeStep#0;class#ZombieDrawable#0" expanded="false" />
             <element signature="method#randStep#0;class#ZombieDrawable#0" expanded="false" />
-            <element signature="e#6157#6158#0" expanded="true" />
-            <element signature="e#6177#6178#0" expanded="true" />
-            <element signature="e#6213#6214#0" expanded="true" />
-            <element signature="e#6233#6234#0" expanded="true" />
-            <element signature="e#6273#6274#0" expanded="true" />
-            <element signature="e#6289#6290#0" expanded="true" />
-            <element signature="e#6330#6331#0" expanded="true" />
-            <element signature="e#6346#6347#0" expanded="true" />
-            <element signature="e#6386#6387#0" expanded="true" />
-            <element signature="e#6405#6406#0" expanded="true" />
-            <element signature="e#6533#6534#0" expanded="true" />
-            <element signature="e#6551#6552#0" expanded="true" />
-            <element signature="e#6595#6596#0" expanded="true" />
-            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6524#6525#0" expanded="true" />
+            <element signature="e#6544#6545#0" expanded="true" />
+            <element signature="e#6585#6586#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mapDrawable/ZombieMapViewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6912929">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6741425">
+          <caret line="62" column="57" selection-start-line="62" selection-start-column="57" selection-end-line="62" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2921#2922#0" expanded="true" />
-            <element signature="e#2956#2957#0" expanded="true" />
-            <element signature="e#3370#3371#0" expanded="true" />
-            <element signature="e#3408#3409#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1239,7 +1113,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>graphhopper-web-0.5.0-with-dep</last-edited>
+          <last-edited>commons-lang3-3.4</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
