@@ -37,6 +37,7 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import sun.java2d.opengl.WGLSurfaceData;
+import utils.AgeGenerator;
 import utils.NameGenerator;
 
 public class MapViewer {
@@ -129,6 +130,7 @@ public class MapViewer {
 
 	public void loadZombiesOnCanvas() {
 		NameGenerator nameGen = new NameGenerator();
+		AgeGenerator ageGen = new AgeGenerator();
 		for (int j = 0; j < 5; j++) {
 			for (int i = 0; i < 2000; i++) {
 				ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(i), ZMV, hopper);
@@ -140,6 +142,7 @@ public class MapViewer {
 					zomb.setGender("f");
 				}
 				zomb.setLastName(nameGen.getSurname());
+				zomb.setAge(ageGen.getAge());
 				this.zombies.add(zomb);
 //			 Thread thread = new Thread((Runnable) zomb);
 //			 this.threads.add(thread);

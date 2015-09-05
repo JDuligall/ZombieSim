@@ -50,6 +50,7 @@ public class ZombieDrawable  implements Runnable {
 	private String firstName;
 	private String lastName;
 	private String gender;
+	private int age;
 
 
 
@@ -272,5 +273,13 @@ public class ZombieDrawable  implements Runnable {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

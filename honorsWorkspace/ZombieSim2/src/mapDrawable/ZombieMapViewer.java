@@ -126,16 +126,17 @@ public class ZombieMapViewer extends JMapViewer{
         }
         if(selected!=null){
             g.setColor(Color.white);
-            g.fillRect(10, 200, 75, 120);
+            g.fillRect(10, 200, 100, 150);
 
             g.setColor(Color.black);
-            g.drawString(selected.getFirstName() + "" , 20, 215);
-            g.drawString(""+selected.getLastName(), 20, 230);
-            g.drawString("Gender: "+selected.getGender(), 20, 245);
-            g.drawString("Lat:", 20, 260);
-            g.drawString(""+selected.lat,20,275);
-            g.drawString("Lon:",20,290);
-            g.drawString(""+selected.lon,20,305);
+            g.drawString(selected.getFirstName() + "" , 20, 220);
+            g.drawString(""+selected.getLastName(), 20, 235);
+            g.drawString(""+selected.getAge(), 20, 255);
+            g.drawString("Gender: "+selected.getGender(), 20, 275);
+            g.drawString("Lat:", 20, 295);
+            g.drawString(""+selected.lat,20,310);
+            g.drawString("Lon:",20,325);
+            g.drawString(""+selected.lon,20,340);
         }
 //        g.dispose();
     }
