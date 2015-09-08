@@ -22,6 +22,7 @@ import com.graphhopper.GHResponse;
 import com.graphhopper.GraphHopper;
 import com.graphhopper.util.shapes.GHPoint3D;
 import main.MapViewer;
+import mapComponents.Road;
 import mapContents.Node;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -46,13 +47,14 @@ public class ZombieDrawable  implements Runnable {
 	private LineIterator iter;
 	private ArrayList<Coordinate> pathCoords;
 	private boolean pathRequested;
+	private Road currentRoad;
 
 	private String firstName;
 	private String lastName;
 	private String gender;
 	private int age;
 
-
+	private boolean diseased;
 
 	private Coordinate toCoord;
 	private Coordinate curCoord;
@@ -69,6 +71,10 @@ public class ZombieDrawable  implements Runnable {
 		this.hasIterated = true;
 		this.newIter = true;
 		this.pathRequested = false;
+		this.diseased = false;
+		currentRoad = node.getRoad();
+		currentRoad.addZombie(this);
+
 	}
 
 	private void requestPath() {
@@ -98,25 +104,34 @@ public class ZombieDrawable  implements Runnable {
 //		int w = map.getWidth();
 
 		if(x != -1 && y != -1 ) {
-			if(clicked){
+			if (clicked) {
 				gra.setColor(Color.red);
 				gra.fillOval((int) this.x - 6, (int) this.y - 6, 12, 12);
 			}
 //			gra.setColor(Color.green);
 //			gra.fillOval();
-			gra.setColor(Color.DARK_GRAY);
+			if(diseased){
+				gra.setColor(Color.green);
+			}
+			else{
+				gra.setColor(Color.DARK_GRAY);
+			}
 			gra.fillOval((int) this.x - 5, (int) this.y - 5, 10, 10);
 
-//			gra.setColor(Color.red);
-//			gra
+//			gra.setColor(Color.blue);
+//			gra.drawRect((int) this.getBounds().getX(), (int) this.getBounds().getY(), 10, 10);
 		}
 	}
 
 	@Override
-	public void run() {		
+	public void run() {
+
 		if(!pathRequested) {
 			pathRequested = true;
 			requestPath();
+		}
+		if(diseased) {
+			currentRoad.doCollision(this);
 		}
 		randStep();
 //		goHomeStep();
@@ -207,6 +222,11 @@ public class ZombieDrawable  implements Runnable {
 				} else {
 					newIter = true;
 					hasIterated = true;
+
+					currentRoad.removeZombie(this);
+					currentRoad = curNode.getRoad();
+					currentRoad.addZombie(this);
+
 					curNode = toNode;
 				}
 
@@ -243,17 +263,15 @@ public class ZombieDrawable  implements Runnable {
 		}
 	}
 
-	public boolean isClicked (double clickX, double clickY){
+	public boolean checkClick(double clickX, double clickY){
 		return (this.x-5 <= clickX && clickX <= this.x+5 && this.y-5 <= clickY && clickY <= this.y+5);
 	}
 
-	public void setClicked(boolean clicked) {
-		this.clicked = clicked;
-	}
+	public boolean isClicked(){return this.clicked;}
 
-	public String getFirstName() {
-		return firstName;
-	}
+	public void setClicked(boolean clicked) {this.clicked = clicked;}
+
+	public String getFirstName() {return firstName;}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -282,4 +300,18 @@ public class ZombieDrawable  implements Runnable {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+	public boolean isDiseased() {return diseased;}
+
+	public void setDiseased(boolean diseased) {this.diseased = diseased;}
+
+	public Road getCurrentRoad() {return currentRoad;}
+
+	public void setCurrentRoad(Road currentRoad) {this.currentRoad = currentRoad;}
+
+	public double getX(){return this.x;}
+
+	public double getY(){return this.y;}
+
+	public Rectangle getBounds(){return new Rectangle((int)this.x-5, (int)this.y-5, 10,10);}
 }

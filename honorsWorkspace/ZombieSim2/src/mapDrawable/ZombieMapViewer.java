@@ -1,6 +1,5 @@
 package mapDrawable;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
 import mapContents.Node;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 
@@ -8,12 +7,11 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.List;
-import java.awt.image.BufferedImage;
 
 
 /**
@@ -22,6 +20,7 @@ import java.awt.image.BufferedImage;
 public class ZombieMapViewer extends JMapViewer{
 
     private final JSlider testSlider;
+    private final JButton infect;
     private final JLabel text;
     private ArrayList<ZombieDrawable> zombies = new ArrayList<ZombieDrawable>();
     private double speed;
@@ -31,6 +30,17 @@ public class ZombieMapViewer extends JMapViewer{
     public ZombieMapViewer(){
 //        this.speed = 0.000001;
         this.speed = 0.0000002;
+
+        infect = new JButton("Infect");
+        infect.setBounds(30, 180, 70,20);
+        infect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(selected != null){
+                    selected.setDiseased(true);
+                }
+            }
+        });
 
         testSlider = new JSlider(0, 9, 1);
         testSlider.setOrientation(JSlider.HORIZONTAL);
@@ -55,11 +65,11 @@ public class ZombieMapViewer extends JMapViewer{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(e.getButton() == 1) {
+                if (e.getButton() == 1) {
                     for (ZombieDrawable zomb : zombies) {
-                        if(zomb.isClicked(e.getX(), e.getY())){
+                        if (zomb.checkClick(e.getX(), e.getY())) {
                             zomb.setClicked(true);
-                            if(selected != null){
+                            if (selected != null) {
                                 selected.setClicked(false);
                             }
                             selected = zomb;
@@ -73,6 +83,7 @@ public class ZombieMapViewer extends JMapViewer{
 
         add(text);
         add(testSlider);
+        add(infect);
 
 
     }
@@ -137,6 +148,9 @@ public class ZombieMapViewer extends JMapViewer{
             g.drawString(""+selected.lat,20,310);
             g.drawString("Lon:",20,325);
             g.drawString(""+selected.lon,20,340);
+
+//            g.drawString(selected.getCurrentRoad().toString(), 20, 390);
+
         }
 //        g.dispose();
     }

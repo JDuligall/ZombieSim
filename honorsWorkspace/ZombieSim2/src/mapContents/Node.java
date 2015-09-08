@@ -7,6 +7,8 @@
 
 package mapContents;
 
+import mapComponents.Road;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -41,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "tag", "neighbours" })
+@XmlType(name = "", propOrder = { "tag", "neighbours" , "road" })
 @XmlRootElement(name = "node")
 public class Node extends OsmBasicType {
 
@@ -55,6 +57,7 @@ public class Node extends OsmBasicType {
 	
 	
 	protected ArrayList<Node> neighbours = new ArrayList<Node>();
+	protected Road road;
 
 	/**
 	 * Gets the value of the tag property.
@@ -146,4 +149,11 @@ public class Node extends OsmBasicType {
 		return neighbours;
 	}
 
+	public Road getRoad() {
+		return road;
+	}
+
+	public void setRoad(Road road) {
+		this.road = road;
+	}
 }

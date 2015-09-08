@@ -11,17 +11,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import com.graphhopper.GHRequest;
-import com.graphhopper.GHResponse;
 import com.graphhopper.GraphHopper;
 import com.graphhopper.routing.util.EncodingManager;
-import com.graphhopper.util.shapes.GHPoint3D;
+import mapComponents.House;
+import mapComponents.Road;
 import mapContents.Nd;
 import mapContents.Node;
 import mapContents.Osm;
@@ -34,9 +31,7 @@ import mapDrawable.ZombieDot;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import sun.java2d.opengl.WGLSurfaceData;
 import utils.AgeGenerator;
 import utils.NameGenerator;
 
@@ -49,6 +44,9 @@ public class MapViewer {
 	private Osm param;
 	private HashMap<BigInteger, Coordinate> locations;
 	private HashMap<Way, ArrayList<Nd>> ways;
+	private HashMap<Way, ArrayList<Nd>> houseWays;
+	private ArrayList<House> houses;
+	private ArrayList<Road> roads;
 	private ArrayList<Node> nodes;
 	private ArrayList<Node> roadNodes;
 	ExecutorService executorService;
@@ -69,6 +67,9 @@ public class MapViewer {
 		roadNodes = new ArrayList<Node>();
 		locations = new HashMap<BigInteger, Coordinate>();
 		ways = new HashMap<Way, ArrayList<Nd>>();
+		houseWays = new HashMap<Way, ArrayList<Nd>>();
+		houses = new ArrayList<House>();
+		roads = new ArrayList<Road>();
 		refNodes = new HashMap<BigInteger, Node>();
 		randomGen = new Random();
 
@@ -122,6 +123,7 @@ public class MapViewer {
 	private void doStuffTest() {
 		readOSMFile();
 //		 loadZombiesAsMapMarkers();
+//		System.out.println("houseWays: " + houseWays.size());
 		setUpHopper();
 		loadZombiesOnCanvas();
 		startSim();
@@ -159,6 +161,7 @@ public class MapViewer {
 		for (int i = 0; i < contents.size(); i++) {
 			Object cur = contents.get(i);
 			Boolean isRoad = false;
+			Boolean isHouse = false;
 			//if its a node then store in the nodes list.
 			if (cur.getClass().equals((mapContents.Node.class))) {
 				Node curNode = (Node) cur;
@@ -187,14 +190,25 @@ public class MapViewer {
 						if (t.getK().equals("highway")) {
 							//Then these nodes can be added to the list.
 							isRoad = true;
+						}else if(t.getK().equals("building")){
+							if(t.getV().equals("house")) {
+								isHouse = true;
+							}
 						}
 					}
 
 				}
 				if (isRoad) {
 					for (Nd nd : nds) {
-						roadNodes.add(refNodes.get(nd.getRef()));
+						Node n = refNodes.get(nd.getRef());
+						Road r = new Road(way, nds);
+						n.setRoad(r);
+						roadNodes.add(n);
+						roads.add(r);
 					}
+				}else if(isHouse){
+					houses.add(new House(way, nds));
+					houseWays.put(way, nds);
 				}
 				ways.put(way, nds);
 			}
