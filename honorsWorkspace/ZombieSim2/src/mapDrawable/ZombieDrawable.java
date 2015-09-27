@@ -39,7 +39,7 @@ public class ZombieDrawable  implements Runnable {
 	private Node curNode;
 	public float lat;
 	public float lon;
-	private ZombieMapViewer map;
+	public ZombieMapViewer map;
 	private Node prevNode;
 	private Node toNode;
 	private boolean hasIterated;
@@ -59,6 +59,7 @@ public class ZombieDrawable  implements Runnable {
 	private Coordinate toCoord;
 	private Coordinate curCoord;
 	private boolean clicked;
+	private boolean diseaseStarted;
 
 
 	public ZombieDrawable(Node node, ZombieMapViewer map, GraphHopper hopper) {
@@ -72,6 +73,7 @@ public class ZombieDrawable  implements Runnable {
 		this.newIter = true;
 		this.pathRequested = false;
 		this.diseased = false;
+		this.diseaseStarted = false;
 		currentRoad = node.getRoad();
 		currentRoad.addZombie(this);
 
@@ -119,6 +121,9 @@ public class ZombieDrawable  implements Runnable {
 			gra.fillOval((int) this.x - 5, (int) this.y - 5, 10, 10);
 
 //			gra.setColor(Color.blue);
+//			if(getCurrentRoad()!=null && getCurrentRoad().roadName!=null){
+//				gra.drawString(getCurrentRoad().roadName, (int) this.x + 10, (int) this.y + 10);
+//			}
 //			gra.drawRect((int) this.getBounds().getX(), (int) this.getBounds().getY(), 10, 10);
 		}
 	}
@@ -252,6 +257,18 @@ public class ZombieDrawable  implements Runnable {
 	// mark neighbour as the one that has just been visited and move to new
 	// neighbour UNLESS only original neighbour, then go back.
 
+	public void startDiseaseTimer(){
+		diseaseStarted = true;
+
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				setDiseased(true);
+			}
+		},map.getDiseaseTime());
+	}
+
 	private void setLoc(float lat, float lon) {
 		Point p = map.getMapPosition(lat, lon);
 		if (p != null) {
@@ -302,6 +319,8 @@ public class ZombieDrawable  implements Runnable {
 	}
 
 	public boolean isDiseased() {return diseased;}
+
+	public boolean hasDisease(){return diseaseStarted;}
 
 	public void setDiseased(boolean diseased) {this.diseased = diseased;}
 

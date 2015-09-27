@@ -19,46 +19,85 @@ import java.util.ArrayList;
  */
 public class ZombieMapViewer extends JMapViewer{
 
-    private final JSlider testSlider;
+    private final JSlider ZomSpeedSlider;
+    private final JSlider diseaseWaitSlider;
     private final JButton infect;
-    private final JLabel text;
+    private final JLabel ZomSpeedtext;
+    private final JLabel diseaseWaitText;
+    private final JSlider diseaseChanceSlider;
+    private final JLabel diseaseChanceText;
     private ArrayList<ZombieDrawable> zombies = new ArrayList<ZombieDrawable>();
     private double speed;
     private Node myHouse;
     private ZombieDrawable selected = null;
+    private long diseaseTime;
+    private int diseaseChance;
 
     public ZombieMapViewer(){
 //        this.speed = 0.000001;
         this.speed = 0.0000002;
+        this.diseaseTime = 10000;
+        this.diseaseChance = 80;
 
         infect = new JButton("Infect");
         infect.setBounds(30, 180, 70,20);
         infect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(selected != null){
+                if (selected != null) {
                     selected.setDiseased(true);
                 }
             }
         });
 
-        testSlider = new JSlider(0, 9, 1);
-        testSlider.setOrientation(JSlider.HORIZONTAL);
-        testSlider.setBounds(100, 10, 150, 20);
-        testSlider.setOpaque(false);
-        testSlider.setToolTipText("Zombie Speed");
-        testSlider.addChangeListener(new ChangeListener() {
+        ZomSpeedSlider = new JSlider(0, 9, 1);
+        ZomSpeedSlider.setOrientation(JSlider.HORIZONTAL);
+        ZomSpeedSlider.setBounds(100, 10, 150, 20);
+        ZomSpeedSlider.setOpaque(false);
+        ZomSpeedSlider.setToolTipText("Zombie Speed");
+        ZomSpeedSlider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                setSpeed(testSlider.getValue());
+                setSpeed(ZomSpeedSlider.getValue());
             }
-
-
         });
-        testSlider.setFocusable(false);
+        ZomSpeedSlider.setFocusable(false);
 
-        text = new JLabel();
-        text.setText("Zombie Speed");
-        text.setBounds(130, 15, 100, 50);
+        ZomSpeedtext = new JLabel();
+        ZomSpeedtext.setText("Zombie Speed");
+        ZomSpeedtext.setBounds(130, 15, 100, 50);
+
+
+        diseaseWaitSlider = new JSlider(1, 9, 1);
+        diseaseWaitSlider.setOrientation(JSlider.HORIZONTAL);
+        diseaseWaitSlider.setBounds(300, 10, 150, 20);
+        diseaseWaitSlider.setOpaque(false);
+        diseaseWaitSlider.setToolTipText("Infection Time");
+        diseaseWaitSlider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                setDiseaseWait(diseaseWaitSlider.getValue());
+            }
+        });
+        diseaseWaitSlider.setFocusable(false);
+
+        diseaseWaitText = new JLabel();
+        diseaseWaitText.setText("Infection Time");
+        diseaseWaitText.setBounds(330, 15, 100, 50);
+
+        diseaseChanceSlider = new JSlider(1, 11, 9);
+        diseaseChanceSlider.setOrientation(JSlider.HORIZONTAL);
+        diseaseChanceSlider.setBounds(450, 10, 150, 20);
+        diseaseChanceSlider.setOpaque(false);
+        diseaseChanceSlider.setToolTipText("Chance of Disease");
+        diseaseChanceSlider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                setDiseaseChance(diseaseChanceSlider.getValue());
+            }
+        });
+        diseaseWaitSlider.setFocusable(false);
+
+        diseaseChanceText = new JLabel();
+        diseaseChanceText.setText("Chance of Disease");
+        diseaseChanceText.setBounds(480, 15, 150, 50);
 
 
         addMouseListener(new MouseAdapter() {
@@ -81,8 +120,12 @@ public class ZombieMapViewer extends JMapViewer{
         });
 
 
-        add(text);
-        add(testSlider);
+        add(ZomSpeedtext);
+        add(ZomSpeedSlider);
+        add(diseaseWaitSlider);
+        add(diseaseWaitText);
+        add(diseaseChanceText);
+        add(diseaseChanceSlider);
         add(infect);
 
 
@@ -110,6 +153,58 @@ public class ZombieMapViewer extends JMapViewer{
                 break;
         }
 
+    }
+
+    private void setDiseaseWait(int wait) {
+        switch(wait) {
+            case 1: this.diseaseTime = 0;
+                break;
+            case 2: this.diseaseTime = 10000;
+                break;
+            case 3: this.diseaseTime = 20000;
+                break;
+            case 4: this.diseaseTime = 30000;
+                break;
+            case 5: this.diseaseTime = 40000;
+                break;
+            case 6: this.diseaseTime = 50000;
+                break;
+            case 7: this.diseaseTime = 60000;
+                break;
+            case 8: this.diseaseTime = 120000;
+                break;
+            case 9: this.diseaseTime = 240000;
+                break;
+        }
+        System.out.println(this.diseaseTime);
+    }
+
+    private void setDiseaseChance(int chance) {
+        switch(chance) {
+            case 1: this.diseaseChance = 0;
+                break;
+            case 2: this.diseaseChance = 10;
+                break;
+            case 3: this.diseaseChance = 20;
+                break;
+            case 4: this.diseaseChance = 30;
+                break;
+            case 5: this.diseaseChance = 40;
+                break;
+            case 6: this.diseaseChance = 50;
+                break;
+            case 7: this.diseaseChance = 60;
+                break;
+            case 8: this.diseaseChance = 70;
+                break;
+            case 9: this.diseaseChance = 80;
+                break;
+            case 10: this.diseaseChance = 90;
+                break;
+            case 11: this.diseaseChance = 100;
+                break;
+        }
+        System.out.println(this.diseaseChance);
     }
 
     public double getSpeed(){
@@ -160,4 +255,11 @@ public class ZombieMapViewer extends JMapViewer{
     }
 
 
+    public long getDiseaseTime() {
+        return diseaseTime;
+    }
+
+    public int getDiseaseChance() {
+        return diseaseChance;
+    }
 }

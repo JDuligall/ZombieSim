@@ -61,7 +61,7 @@ public class MapViewer {
 
 	public MapViewer() {
 
-		osmFile = "assets/myHouse1.osm";
+		osmFile = "assets/map.osm";
 		param = null;
 		nodes = new ArrayList<Node>();
 		roadNodes = new ArrayList<Node>();
@@ -133,23 +133,25 @@ public class MapViewer {
 	public void loadZombiesOnCanvas() {
 		NameGenerator nameGen = new NameGenerator();
 		AgeGenerator ageGen = new AgeGenerator();
-		for (int j = 0; j < 5; j++) {
-			for (int i = 0; i < 2000; i++) {
-				ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(i), ZMV, hopper);
-				if(randomGen.nextBoolean()){
-					zomb.setFirstName(nameGen.getBoyName());
-					zomb.setGender("m");
-				}else {
-					zomb.setFirstName(nameGen.getGirlName());
-					zomb.setGender("f");
-				}
-				zomb.setLastName(nameGen.getSurname());
-				zomb.setAge(ageGen.getAge());
-				this.zombies.add(zomb);
+
+		Random rand = new Random();
+
+		for(int i = 0; i <10000; i++) {
+			int j = rand.nextInt(roadNodes.size());
+			ZombieDrawable zomb = new ZombieDrawable(roadNodes.get(j), ZMV, hopper);
+			if (randomGen.nextBoolean()) {
+				zomb.setFirstName(nameGen.getBoyName());
+				zomb.setGender("m");
+			} else {
+				zomb.setFirstName(nameGen.getGirlName());
+				zomb.setGender("f");
+			}
+			zomb.setLastName(nameGen.getSurname());
+			zomb.setAge(ageGen.getAge());
+			this.zombies.add(zomb);
 //			 Thread thread = new Thread((Runnable) zomb);
 //			 this.threads.add(thread);
-				//executorService.submit(run);
-			}
+			//executorService.submit(run);
 		}
 	}
 
@@ -199,13 +201,13 @@ public class MapViewer {
 
 				}
 				if (isRoad) {
+					Road r = new Road(way, nds);
 					for (Nd nd : nds) {
 						Node n = refNodes.get(nd.getRef());
-						Road r = new Road(way, nds);
 						n.setRoad(r);
 						roadNodes.add(n);
-						roads.add(r);
 					}
+					roads.add(r);
 				}else if(isHouse){
 					houses.add(new House(way, nds));
 					houseWays.put(way, nds);

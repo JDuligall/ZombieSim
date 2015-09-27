@@ -1,11 +1,12 @@
 package mapComponents;
 
 import mapContents.Nd;
+import mapContents.Tag;
 import mapContents.Way;
 import mapDrawable.ZombieDrawable;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by Jacob on 06/09/2015.
@@ -15,11 +16,32 @@ public class Road {
     private ArrayList<ZombieDrawable> zombies;
     private Way way;
     private ArrayList<Nd> nodes;
+    public String roadName;
+    private Random rand;
 
     public Road(Way way, ArrayList<Nd> nodes){
         this.way = way;
         this.nodes = nodes;
+        this.rand = new Random();
+
+        roadName = getRoadName(way);
+
         this.zombies = new ArrayList<ZombieDrawable>();
+    }
+
+    private String getRoadName(Way way) {
+        String name = "";
+
+        java.util.List<Object> wayStuff= way.getRest();
+        for(Object obj: wayStuff) {
+            if (obj.getClass().equals(Tag.class)) {
+                Tag t = (Tag) obj;
+                if (t.getK().equals("name")) {
+                    name = t.getV();
+                }
+            }
+        }
+        return name;
     }
 
 
@@ -39,10 +61,15 @@ public class Road {
         Rectangle rect1 = zomb.getBounds();
 
         for(ZombieDrawable zom : zombies){
-            if(!zom.isDiseased()){
+            if(!zom.hasDisease()){
                 Rectangle rect2 = zom.getBounds();
                 if(rect1.intersects(rect2)){
-                    zom.setDiseased(true);
+                    int i = rand.nextInt(100);
+//                    zom.setDiseased(true);
+                    if(i <= zom.map.getDiseaseChance()) {
+                        zom.startDiseaseTimer();
+                        System.out.println("INFECTED");
+                    }
                 }
             }
 //            double x2 = zom.getX();
